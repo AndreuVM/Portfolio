@@ -12,8 +12,8 @@ Portfolio — opción 4 (CLI).html
 *tu.nombre*.html
 *opción*.html
 
-# Bases de datos locales y registros de sistema
-data/
+# Bases de datos locales y registros de sistema (directorio raíz)
+/data/
 *.db
 *.db-shm
 *.db-wal
