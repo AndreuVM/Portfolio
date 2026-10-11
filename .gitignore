@@ -1,0 +1,37 @@
+# ==============================================================================
+# .gitignore · Portfolio Personal (Andreu Marquès Goyes)
+# ==============================================================================
+
+# Informes de diseño y documentación interna de desarrollo
+Informe de diseño — Portfolio personal (interfaz CLI).md
+*informe*diseño*.md
+
+# Plantillas y archivos HTML utilizados como guía / opciones preliminares
+tu.nombre — portfolio.html
+Portfolio — opción 4 (CLI).html
+*tu.nombre*.html
+*opción*.html
+
+# Bases de datos locales y registros de sistema
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Archivos de entorno y del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores y entornos de desarrollo (IDE)
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs y depuración
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

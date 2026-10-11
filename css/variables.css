@@ -1,0 +1,79 @@
+/* ==========================================================================
+   Variables y Sistema de Diseño Editorial
+   Papel Hueso (#ece7dc) · Tinta (#1a1914) · Marcador Amarillo (#f2e24a)
+   ========================================================================== */
+
+:root {
+  --bg: #ece7dc;
+  --fg: #1a1914;
+  --mut: #5e584b; /* WCAG 2.1 AA contraste >= 4.5:1 sobre #ece7dc */
+  --line: #c9c2b3;
+  --hl: #f2e24a;
+  --err: #c4381f;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14130f;
+    --fg: #ece7dc;
+    --mut: #9c9689; /* WCAG 2.1 AA contraste >= 4.5:1 sobre #14130f */
+    --line: #2f2d26;
+    --err: #ff7a5c;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14130f;
+  --fg: #ece7dc;
+  --mut: #9c9689;
+  --line: #2f2d26;
+  --err: #ff7a5c;
+}
+
+:root[data-theme="light"] {
+  --bg: #ece7dc;
+  --fg: #1a1914;
+  --mut: #5e584b;
+  --line: #c9c2b3;
+  --err: #c4381f;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .06;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--hl);
+  color: #1a1914;
+}

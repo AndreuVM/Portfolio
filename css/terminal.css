@@ -1,0 +1,348 @@
+/* ==========================================================================
+   Interfaz Terminal CLI · Andreu Marquès Goyes
+   ========================================================================== */
+
+@import './variables.css';
+
+/* Accesibilidad y SEO contenido semántico */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Barra superior fija */
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 4vw;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.top-left { display: flex; align-items: center; gap: 10px; }
+.top-right { display: flex; align-items: center; gap: 10px; }
+.top i.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2fb344;
+  margin-right: 5px;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+@keyframes pulse-dot { 50% { opacity: .3; } }
+
+/* Selector de idioma segmentado */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 3px;
+  gap: 2px;
+}
+.lang-btn {
+  font: inherit;
+  font-size: 10px;
+  background: none;
+  border: 0;
+  color: var(--mut);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 500;
+  transition: .15s;
+}
+.lang-btn.active {
+  background: var(--hl);
+  color: #1a1914;
+  font-weight: 600;
+}
+.lang-btn:hover:not(.active) {
+  color: var(--fg);
+}
+.lang-sep {
+  color: var(--line);
+  font-size: 9px;
+  user-select: none;
+}
+
+.nav-btn {
+  font: inherit;
+  font-size: 11px;
+  color: var(--fg);
+  background: none;
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: .15s;
+}
+.nav-btn:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: var(--hl);
+}
+
+/* Contenedor principal de terminal */
+#t {
+  max-width: 980px;
+  padding: 4vh 4vw 220px;
+  cursor: text;
+  position: relative;
+  z-index: 2;
+}
+#in {
+  scroll-margin-bottom: 200px;
+}
+
+/* Banda animada de partículas desplazable con el scroll de la página */
+#band {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 190px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.l {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 1.55em;
+}
+.ban {
+  font-size: clamp(30px, 8vw, 84px);
+  font-weight: 600;
+  letter-spacing: -.05em;
+  line-height: 1.05;
+  margin: 1.5vh 0 1vh;
+}
+.ban:after {
+  content: "_";
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Banner con acento de subrayador */
+.ban-hl {
+  border-bottom: 5px solid var(--hl);
+  display: inline-block;
+  line-height: .95;
+}
+
+/* Utilidades tipográficas terminal con acentos de subrayador amarillo */
+.m { color: var(--mut); }
+.e { color: var(--err); font-weight: 500; }
+
+/* Resaltado bloque amarillo completo */
+.h {
+  background: var(--hl);
+  color: #1a1914;
+  padding: 1px 6px;
+  font-weight: 600;
+  display: inline-block;
+  margin: 4px 0 2px;
+  border-radius: 2px;
+}
+
+/* Resaltado de nombre y términos clave estilo marcador */
+.h-name {
+  background: var(--hl);
+  color: #1a1914;
+  padding: 0 5px;
+  font-weight: 600;
+  border-radius: 2px;
+  display: inline;
+}
+
+/* Subrayado estilo rotulador amarillo */
+.hl-u {
+  text-decoration: underline;
+  text-decoration-color: var(--hl);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+/* Acento cromático amarillo para palabras clave técnicas */
+.hl-k {
+  color: var(--hl);
+  font-weight: 600;
+}
+:root:not([data-theme="dark"]) .hl-k {
+  color: #8a6c00; /* Contraste óptimo sobre papel claro */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hl-k {
+    color: var(--hl);
+  }
+}
+:root[data-theme="dark"] .hl-k {
+  color: var(--hl);
+}
+
+/* Barras de skills con brillo amarillo en modo oscuro / tinta en modo claro */
+.bar-fill {
+  color: var(--hl);
+}
+:root:not([data-theme="dark"]) .bar-fill {
+  color: #1a1914;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bar-fill {
+    color: var(--hl);
+  }
+}
+:root[data-theme="dark"] .bar-fill {
+  color: var(--hl);
+}
+
+.c {
+  cursor: pointer;
+  border-bottom: 1px dashed var(--mut);
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+}
+.c:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: transparent;
+}
+.pj {
+  cursor: pointer;
+  display: block;
+  padding: 4px 8px;
+  margin: 2px 0;
+  border-radius: 2px;
+  text-decoration: none;
+  color: inherit;
+  transition: background .12s;
+}
+.pj:hover {
+  background: color-mix(in srgb, var(--hl) 35%, transparent);
+}
+.pj b { font-weight: 600; }
+.plate {
+  width: min(100%, 380px);
+  height: 140px;
+  border: 1px solid var(--fg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #1a1914;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+.plate span.plate-code { font-weight: 600; font-size: 13px; }
+.plate span.plate-sub { font-size: 10px; opacity: .85; }
+
+/* Línea de entrada / prompt */
+.pr {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+.pr input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  color: var(--fg);
+  caret-color: var(--hl);
+  min-width: 0;
+}
+.pr input::placeholder {
+  color: var(--mut);
+  opacity: .5;
+  font-size: 13px;
+}
+.p b { font-weight: 600; }
+
+/* Botones de sugerencias rápidas */
+.sug {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.sug button {
+  font: inherit;
+  font-size: 13px;
+  color: var(--fg);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.sug button:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: var(--hl);
+  transform: translateY(-1px);
+}
+
+/* Previsualización flotante con inercia para proyectos */
+#pv {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 270px;
+  height: 310px;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity .2s;
+  border: 1px solid var(--fg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #1a1914;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+#pv.on { opacity: 1; }
+#pv .pv-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+#pv .pv-tag { font-size: 10px; opacity: .9; margin-bottom: 6px; }
+#pv .pv-desc { font-size: 10px; line-height: 1.35; opacity: .95; }
+
+@media (max-width: 720px) {
+  #pv { display: none !important; }
+  .top .top-clock { display: none; }
+  #band { height: 130px; }
+  #t { padding-bottom: 170px; }
+  #in { scroll-margin-bottom: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01s !important; transition-duration: .01s !important; }
+}
