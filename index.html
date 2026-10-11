@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Andreu Marquès Goyes — Ingeniero Backend y de Sistemas | Portfolio</title>
+<meta name="description" content="Portfolio interactivo de Andreu Marquès Goyes. Ingeniero Backend y de Sistemas especializado en APIs de alta concurrencia, sandboxing de agentes IA, arquitectura de datos y bajo nivel.">
+<meta name="keywords" content="Andreu Marquès Goyes, Backend Engineer, Systems Engineer, C++, Python, Linux, POSIX, MCP, AI Agents, Sandboxing, FastAPI, Docker, Portfolio">
+<meta name="author" content="Andreu Marquès Goyes">
+
+<!-- Open Graph / Redes Sociales -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Andreu Marquès Goyes — Backend &amp; Systems Engineer">
+<meta property="og:description" content="Portfolio interactivo en terminal CLI: APIs de alta concurrencia, sandboxing seguro de IA, C/C++, Python y arquitectura de sistemas.">
+<meta property="og:locale" content="es_ES">
+<meta property="og:locale:alternate" content="en_US">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Andreu Marquès Goyes — Backend &amp; Systems Engineer">
+<meta name="twitter:description" content="Portfolio interactivo en terminal CLI: APIs de alta concurrencia, sandboxing seguro de IA, C/C++, Python y arquitectura de sistemas.">
+
+<!-- JSON-LD Datos Estructurados para SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Andreu Marquès Goyes",
+  "jobTitle": "Backend & Systems Engineer",
+  "url": "https://github.com/AndreuVM",
+  "email": "andreuvaleria25@gmail.com",
+  "telephone": "+34640142281",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Palma de Mallorca",
+    "addressCountry": "ES"
+  },
+  "sameAs": [
+    "https://github.com/AndreuVM",
+    "https://linkedin.com/in/andreuvm"
+  ],
+  "knowsAbout": [
+    "C", "C++", "Python", "Java", "Linux Internals", "POSIX", "Docker",
+    "Model Context Protocol (MCP)", "FastAPI", "High Concurrency",
+    "Database Architecture", "Sandboxing", "Algorithmic Engineering"
+  ],
+  "alumniOf": [
+    "Universitat de les Illes Balears",
+    "Universidad Alfonso X el Sabio"
+  ]
+}
+</script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+:root {
+  --bg: #ece7dc;
+  --fg: #1a1914;
+  --mut: #5e584b; /* WCAG 2.1 AA contraste >= 4.5:1 sobre #ece7dc */
+  --line: #c9c2b3;
+  --hl: #f2e24a;
+  --err: #c4381f;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14130f;
+    --fg: #ece7dc;
+    --mut: #9c9689; /* WCAG 2.1 AA contraste >= 4.5:1 sobre #14130f */
+    --line: #2f2d26;
+    --err: #ff7a5c;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14130f;
+  --fg: #ece7dc;
+  --mut: #9c9689;
+  --line: #2f2d26;
+  --err: #ff7a5c;
+}
+:root[data-theme="light"] {
+  --bg: #ece7dc;
+  --fg: #1a1914;
+  --mut: #5e584b;
+  --line: #c9c2b3;
+  --err: #c4381f;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+* { box-sizing: border-box; margin: 0; }
+body {
+  position: relative;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.55;
+  overflow-x: hidden;
+  transition: background .3s, color .3s;
+}
+body:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .06;
+  z-index: 50;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection { background: var(--hl); color: #1a1914; }
+
+/* Barra superior fija */
+.top {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 4vw;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--mut);
+}
+.top-left { display: flex; align-items: center; gap: 10px; }
+.top-right { display: flex; align-items: center; gap: 10px; }
+.top i.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2fb344;
+  margin-right: 5px;
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+@keyframes pulse-dot { 50% { opacity: .3; } }
+
+/* Selector de idioma segmentado */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1px 3px;
+  gap: 2px;
+}
+.lang-btn {
+  font: inherit;
+  font-size: 10px;
+  background: none;
+  border: 0;
+  color: var(--mut);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-weight: 500;
+  transition: .15s;
+}
+.lang-btn.active {
+  background: var(--hl);
+  color: #1a1914;
+  font-weight: 600;
+}
+.lang-btn:hover:not(.active) {
+  color: var(--fg);
+}
+.lang-sep {
+  color: var(--line);
+  font-size: 9px;
+  user-select: none;
+}
+
+.nav-btn {
+  font: inherit;
+  font-size: 11px;
+  color: var(--fg);
+  background: none;
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: .15s;
+}
+.nav-btn:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: var(--hl);
+}
+
+/* Contenedor principal de terminal */
+#t {
+  max-width: 980px;
+  padding: 4vh 4vw 220px;
+  cursor: text;
+  position: relative;
+  z-index: 2;
+}
+#in {
+  scroll-margin-bottom: 200px;
+}
+
+/* Banda animada de partículas desplazable con el scroll de la página */
+#band {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 190px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.l {
+  white-space: pre-wrap;
+  word-break: break-word;
+  min-height: 1.55em;
+}
+.ban {
+  font-size: clamp(30px, 8vw, 84px);
+  font-weight: 600;
+  letter-spacing: -.05em;
+  line-height: 1.05;
+  margin: 1.5vh 0 1vh;
+}
+.ban:after {
+  content: "_";
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Banner con acento de subrayador */
+.ban-hl {
+  border-bottom: 5px solid var(--hl);
+  display: inline-block;
+  line-height: .95;
+}
+
+/* Utilidades tipográficas terminal con acentos de subrayador amarillo */
+.m { color: var(--mut); }
+.e { color: var(--err); font-weight: 500; }
+
+/* Resaltado bloque amarillo completo */
+.h {
+  background: var(--hl);
+  color: #1a1914;
+  padding: 1px 6px;
+  font-weight: 600;
+  display: inline-block;
+  margin: 4px 0 2px;
+  border-radius: 2px;
+}
+
+/* Resaltado de nombre y términos clave estilo marcador */
+.h-name {
+  background: var(--hl);
+  color: #1a1914;
+  padding: 0 5px;
+  font-weight: 600;
+  border-radius: 2px;
+  display: inline;
+}
+
+/* Subrayado estilo rotulador amarillo */
+.hl-u {
+  text-decoration: underline;
+  text-decoration-color: var(--hl);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+  font-weight: 600;
+}
+
+/* Acento cromático amarillo para palabras clave técnicas */
+.hl-k {
+  color: var(--hl);
+  font-weight: 600;
+}
+:root:not([data-theme="dark"]) .hl-k {
+  color: #8a6c00; /* Contraste óptimo sobre papel claro */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hl-k {
+    color: var(--hl);
+  }
+}
+:root[data-theme="dark"] .hl-k {
+  color: var(--hl);
+}
+
+/* Barras de skills con brillo amarillo en modo oscuro / tinta en modo claro */
+.bar-fill {
+  color: var(--hl);
+}
+:root:not([data-theme="dark"]) .bar-fill {
+  color: #1a1914;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bar-fill {
+    color: var(--hl);
+  }
+}
+:root[data-theme="dark"] .bar-fill {
+  color: var(--hl);
+}
+
+.c {
+  cursor: pointer;
+  border-bottom: 1px dashed var(--mut);
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+}
+.c:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: transparent;
+}
+.pj {
+  cursor: pointer;
+  display: block;
+  padding: 4px 8px;
+  margin: 2px 0;
+  border-radius: 2px;
+  text-decoration: none;
+  color: inherit;
+  transition: background .12s;
+}
+.pj:hover {
+  background: color-mix(in srgb, var(--hl) 35%, transparent);
+}
+.pj b { font-weight: 600; }
+.plate {
+  width: min(100%, 380px);
+  height: 140px;
+  border: 1px solid var(--fg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 12px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #1a1914;
+  margin: 10px 0;
+  position: relative;
+  overflow: hidden;
+}
+.plate span.plate-code { font-weight: 600; font-size: 13px; }
+.plate span.plate-sub { font-size: 10px; opacity: .85; }
+
+/* Línea de entrada / prompt */
+.pr {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 8px;
+}
+.pr input {
+  flex: 1;
+  background: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  color: var(--fg);
+  caret-color: var(--hl);
+  min-width: 0;
+}
+.pr input::placeholder {
+  color: var(--mut);
+  opacity: .5;
+  font-size: 13px;
+}
+.p b { font-weight: 600; }
+
+/* Botones de sugerencias rápidas */
+.sug {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.sug button {
+  font: inherit;
+  font-size: 13px;
+  color: var(--fg);
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 5px 14px;
+  cursor: pointer;
+  transition: .15s ease;
+}
+.sug button:hover {
+  background: var(--hl);
+  color: #1a1914;
+  border-color: var(--hl);
+  transform: translateY(-1px);
+}
+
+/* Previsualización flotante con inercia para proyectos */
+#pv {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 270px;
+  height: 310px;
+  pointer-events: none;
+  z-index: 40;
+  opacity: 0;
+  transition: opacity .2s;
+  border: 1px solid var(--fg);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 14px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #1a1914;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+#pv.on { opacity: 1; }
+#pv .pv-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+#pv .pv-tag { font-size: 10px; opacity: .9; margin-bottom: 6px; }
+#pv .pv-desc { font-size: 10px; line-height: 1.35; opacity: .95; }
+
+/* Accesibilidad y SEO contenido estático */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 720px) {
+  #pv { display: none !important; }
+  .top .top-clock { display: none; }
+  #band { height: 130px; }
+  #t { padding-bottom: 170px; }
+  #in { scroll-margin-bottom: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01s !important; transition-duration: .01s !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- Accesibilidad & SEO semántico -->
+<header class="sr-only" id="sr-header">
+  <h1 id="sr-title">Andreu Marquès Goyes — Ingeniero Backend y de Sistemas</h1>
+  <p id="sr-desc">Especialista en APIs de alta concurrencia, sandboxing seguro de agentes IA, arquitectura de datos y programación de sistemas en Linux y C/C++.</p>
+  <nav>
+    <a href="#about" id="sr-nav-about">Sobre mí</a>
+    <a href="#projects" id="sr-nav-projects">Proyectos</a>
+    <a href="#skills" id="sr-nav-skills">Habilidades</a>
+    <a href="#contact" id="sr-nav-contact">Contacto</a>
+    <a href="CV_Andreu_Marques_Goyes_ES.pdf">Descargar CV Español</a>
+    <a href="CV_Andreu_Marques_Goyes_EN.pdf">Download English CV</a>
+  </nav>
+</header>
+
+<div class="top">
+  <div class="top-left">
+    <span id="top-title">andreu.marques — portfolio v1.2</span>
+  </div>
+  <div class="top-right">
+    <span><i class="status-dot"></i><span id="top-status">disponible</span></span>
+    <span class="top-clock" id="clk" style="font-weight:500">--:--:--</span>
+    <div class="lang-switch" role="group" aria-label="Idioma / Language">
+      <button class="lang-btn active" data-lang="es" title="Ver en Español">ES</button>
+      <span class="lang-sep">/</span>
+      <button class="lang-btn" data-lang="en" title="View in English">EN</button>
+    </div>
+    <button class="nav-btn" id="btn-theme" title="Cambiar tema claro/oscuro">☀/☾</button>
+  </div>
+</div>
+
+<main id="t">
+  <div id="welcome"></div>
+  <div id="out" aria-live="polite" aria-atomic="false"></div>
+  <div class="pr" id="pr">
+    <span class="p"><b id="prompt-user">visitante@andreu</b><span class="m">:~$</span></span>
+    <input id="in" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Escribe un comando (ej: help, projects, about)..." aria-label="Línea de comandos">
+  </div>
+  <div class="sug" id="sug"></div>
+</main>
+
+<div id="pv"></div>
+<canvas id="band" aria-hidden="true"></canvas>
+
+<noscript>
+  <div style="max-width:800px;margin:2rem auto;padding:1.5rem;border:1px solid #c9c2b3;font-family:monospace;">
+    <h2>Andreu Marquès Goyes — Backend &amp; Systems Engineer</h2>
+    <p>Palma de Mallorca, España · andreuvaleria25@gmail.com · +34 640 142 281</p>
+    <p>GitHub: <a href="https://github.com/AndreuVM">github.com/AndreuVM</a> · LinkedIn: <a href="https://linkedin.com/in/andreuvm">linkedin.com/in/andreuvm</a></p>
+    <hr style="margin:1rem 0;">
+    <h3>Proyectos Principales:</h3>
+    <ul>
+      <li><strong>PRAXEON</strong>: Runtime de supervisión y seguridad para agentes IA (Python, Docker, MCP, HMAC, FastAPI).</li>
+      <li><strong>Unix Shell &amp; Virtual File System Simulator</strong>: Shell POSIX y simulador de FS con inodos y memoria zero-leak (C/C++, POSIX, Valgrind).</li>
+      <li><strong>High-Performance Trie &amp; Word Engine</strong>: Árbol de prefijos O(L) y compilación dinámica Regex (Java, Android SDK).</li>
+      <li><strong>Smart Restaurant Capacity Engine</strong>: Microservicio asíncrono con predicción ML de rotación de mesas (Python, FastAPI, Scikit-Learn, Docker).</li>
+    </ul>
+    <p><a href="CV_Andreu_Marques_Goyes_ES.pdf">Descargar CV (Español)</a> | <a href="CV_Andreu_Marques_Goyes_EN.pdf">Download Resume (English)</a></p>
+  </div>
+</noscript>
+
+<script>
+const $ = s => document.querySelector(s),
+      welcome = $('#welcome'),
+      out = $('#out'),
+      inp = $('#in'),
+      R = document.documentElement;
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const cl = (c, t) => `<a class="c" data-c="${c}">${t || c}</a>`;
+const pad = (s, n) => s + ' '.repeat(Math.max(1, n - s.length));
+
+// Estado de idioma (persistido o detectado)
+let curLang = localStorage.getItem('portfolio_lang') || 
+  ((navigator.language && navigator.language.startsWith('en')) ? 'en' : 'es');
+
+let lastExecutedCmd = null;
+
+const PROJECTS = [
+  {
+    id: 1,
+    slug: 'praxeon',
+    name: {
+      es: 'PRAXEON: Runtime de Supervisión y Seguridad para Agentes IA',
+      en: 'PRAXEON: Runtime Supervision & Security for AI Agents'
+    },
+    tag: 'Python · Docker · MCP · HMAC · FastAPI',
+    gradA: '#10ac84',
+    gradB: '#01a3a4',
+    plateCode: 'P-001 // SEC-RUNTIME',
+    tests: '293 tests passing',
+    latency: 'p50 ~ 0.22 ms',
+    desc: {
+      es: 'Middleware determinista que desacopla propuestas estocásticas de LLMs de la ejecución física mediante capacidades efímeras HMAC-SHA256 y almacén durable anti-replay.\nImplementa sandboxing multicapa (contenedores OCI --read-only y jail local anti-traversal/SSRF), servidor nativo MCP y suite de benchmarks reproducibles.',
+      en: 'Deterministic middleware decoupling stochastic LLM proposals from physical execution via time-bounded HMAC-SHA256 capabilities and durable anti-replay nonce storage.\nImplements multi-tier sandboxing (OCI containers with --read-only and local jail mitigating symlink traversal/SSRF), native MCP server, and empirical benchmarks.'
+    },
+    stack: 'Python 3.12, Docker, Model Context Protocol (MCP), HMAC-SHA256, FastAPI, Pytest',
+    repo: 'https://github.com/AndreuVM/praxeon',
+    demo: null
+  },
+  {
+    id: 2,
+    slug: 'unix-shell-vfs',
+    name: {
+      es: 'Shell Unix Personalizada & Simulador de Sistema de Archivos',
+      en: 'Custom Unix Shell & Virtual File System Simulator'
+    },
+    tag: 'C/C++ · Linux Systems · POSIX · Valgrind',
+    gradA: '#ee5253',
+    gradB: '#ff9f43',
+    plateCode: 'P-002 // KERNEL-VFS',
+    tests: 'Zero-leak Valgrind verified',
+    latency: 'Sub-millisecond execution',
+    desc: {
+      es: 'Shell tipo Unix construida desde cero con gestión de ciclo de vida de procesos (fork, exec, signals) y memoria zero-leak validada exhaustivamente con Valgrind.\nSimulador de file system virtual con asignación por bloques en disco, tabla de inodos, resolución recursiva de rutas y permisos POSIX multinivel.',
+      en: 'Unix-like shell built from scratch featuring custom process lifecycle management (fork, exec, signals) and zero-leak memory verified with Valgrind.\nVirtual file system simulator with block-based disk allocation, inode pointers, recursive path resolution, and multi-tier POSIX permission validations.'
+    },
+    stack: 'C, C++, Linux Systems Programming, POSIX API, GDB, Valgrind, Make',
+    repo: 'https://github.com/AndreuVM',
+    demo: null
+  },
+  {
+    id: 3,
+    slug: 'trie-word-engine',
+    name: {
+      es: 'Motor de Palabras y Diccionario de Alto Rendimiento',
+      en: 'High-Performance Trie-Based Dictionary & Word Engine'
+    },
+    tag: 'Java · Android SDK · Estructuras de Datos · Regex',
+    gradA: '#5f27cd',
+    gradB: '#341f97',
+    plateCode: 'P-003 // ALGO-TRIE',
+    tests: 'Benchmark O(L) lookups',
+    latency: 'Latency < 1 ms',
+    desc: {
+      es: 'Estructura en árbol de prefijos (Trie) optimizada para búsquedas de diccionario en O(L) sobre decenas de miles de palabras en memoria.\nMódulo de coincidencia de patrones con compilación dinámica de Regex para validación y filtrado de anagramas con latencia submilisegundo.',
+      en: 'Optimized prefix tree (Trie) data structure to perform O(L) dictionary lookups across tens of thousands of words in memory.\nHigh-throughput pattern matching module utilizing dynamic Regex compilation to validate anagram permutations with sub-millisecond execution latency.'
+    },
+    stack: 'Java, Android SDK, Estructuras de Datos Avanzadas (Trie), Dynamic Regex, JUnit',
+    repo: 'https://github.com/AndreuVM',
+    demo: null
+  },
+  {
+    id: 4,
+    slug: 'capacity-queue-engine',
+    name: {
+      es: 'Motor Inteligente de Optimización de Capacidad y Colas',
+      en: 'Smart Restaurant Capacity & Queue Optimization Engine'
+    },
+    tag: 'Python · FastAPI · Scikit-Learn · Docker · SQL',
+    gradA: '#2e86de',
+    gradB: '#0abde3',
+    plateCode: 'P-004 // ML-OPT-QUEUE',
+    tests: '-28% tiempos de espera / wait times',
+    latency: 'Async I/O concurrente',
+    desc: {
+      es: 'Microservicio asíncrono con modelo de regresión de Machine Learning para predecir rotación de mesas y asignación dinámica de capacidad, reduciendo esperas en un 28%.\nServicios contenedorizados con Docker y APIs REST de alta concurrencia con validación de esquemas y telemetría JSON estructurada.',
+      en: 'Asynchronous backend service with ML regression predicting table turn-times to optimize seat allocation, reducing customer wait times by 28%.\nContainerized services with Docker and high-concurrency REST APIs with automated schema validation and structured JSON telemetry.'
+    },
+    stack: 'Python, FastAPI, Scikit-Learn, Docker, PostgreSQL / SQL, Pydantic, Asynchronous I/O',
+    repo: 'https://github.com/AndreuVM',
+    demo: null
+  }
+];
+
+// Comandos canónicos que se mantienen idénticos en ambos idiomas
+const CLI_BUTTONS = [
+  'help', 'about', 'skills', 'projects', 'neofetch', 'cv', 'hire', 'contact'
+];
+
+// Diccionarios bilingües: contenido localizado, comandos siempre canónicos
+const I18N = {
+  es: {
+    pageTitle: 'Andreu Marquès Goyes — Ingeniero Backend y de Sistemas | Portfolio',
+    metaDesc: 'Portfolio interactivo de Andreu Marquès Goyes. Ingeniero Backend y de Sistemas especializado en APIs de alta concurrencia, sandboxing de agentes IA, arquitectura de datos y bajo nivel.',
+    srTitle: 'Andreu Marquès Goyes — Ingeniero Backend y de Sistemas',
+    srDesc: 'Especialista en APIs de alta concurrencia, sandboxing seguro de agentes IA, arquitectura de datos y programación de sistemas en Linux y C/C++.',
+    srNav: ['Sobre mí', 'Proyectos', 'Habilidades', 'Contacto'],
+    promptUser: 'visitante@andreu',
+    inputPlaceholder: 'Escribe un comando (ej: help, projects, about)...',
+    inputAria: 'Línea de comandos',
+    status: 'disponible',
+    statusTitle: 'Disponible para incorporación presencial o remota',
+    topTitle: 'andreu.marques — portfolio v1.2',
+    bannerSub: 'Ingeniero Backend / Sistemas · <span class="hl-k">APIs Concurrentes</span>, <span class="hl-k">Sandboxing IA</span> & <span class="hl-k">Arquitectura de Datos</span>',
+    welcomeLine1: 'Bienvenido/a. Estás explorando el portfolio de <span class="h-name">Andreu Marquès Goyes</span>.',
+    welcomeLine2: 'Terminal interactiva <span class="hl-k">[CLI]</span>. Escribe <span class="hl-u">' + cl('help') + '</span> o pulsa un botón para explorar.',
+    nextSug: '→ sugerido: ',
+    helpHeader: 'comandos disponibles',
+    helpRows: [
+      ['about', 'perfil técnico y filosofía de ingeniería'],
+      ['skills', 'tecnologías, sistemas, backend e IA'],
+      ['projects', 'proyectos destacados con métricas reales'],
+      ['open <n>', 'ficha técnica detallada del proyecto (1-4)'],
+      ['neofetch', 'resumen rápido estilo sistema Unix'],
+      ['cv', 'ver y descargar currículum en PDF (ES / EN)'],
+      ['hire', 'disponibilidad, modalidades y propuesta de valor'],
+      ['education', 'fundamentos universitarios DAM y UIB'],
+      ['experience', 'trayectoria profesional y freelance'],
+      ['contact', 'email, teléfono, GitHub y LinkedIn'],
+      ['lang [es|en]', 'cambiar el idioma del portfolio'],
+      ['theme', 'alternar modo claro y oscuro'],
+      ['clear', 'limpiar la pantalla de la terminal']
+    ],
+    helpHint: 'Tab autocompleta · ↑ ↓ historial · Pulsa sobre cualquier comando para ejecutarlo.',
+    about: [
+      '<span class="h">about.txt // Andreu Marquès Goyes</span>',
+      'Ingeniero de <span class="hl-u">Backend y Sistemas</span> con base sólida en Ciencias de la Computación.',
+      'Me especializo en diseñar software donde el rendimiento, la fiabilidad y la seguridad no son negociables:',
+      '',
+      '• <span class="hl-k">Sandboxing & Supervisión IA:</span> Runtime determinista desacoplando propuestas estocásticas mediante HMAC-SHA256, jail OCI y servidores nativos MCP.',
+      '• <span class="hl-k">Programación de Sistemas:</span> Llamadas al sistema POSIX, concurrencia multihilo, ciclo de vida de procesos y memoria zero-leak auditada en Valgrind.',
+      '• <span class="hl-k">Arquitectura Backend:</span> APIs RESTful asíncronas de alta concurrencia, microservicios, optimización de queries e integridad ACID.',
+      '',
+      'Resido en Palma de Mallorca (España) y estoy <span class="h-name">disponible para incorporación presencial o remota</span>.',
+      '',
+      '<span class="m">→ siguientes pasos:</span> ' + cl('projects') + ' · ' + cl('skills') + ' · ' + cl('cv') + ' · ' + cl('hire')
+    ],
+    skillsHeader: 'habilidades técnicas',
+    skillGroups: [
+      {
+        title: 'LENGUAJES DE PROGRAMACIÓN',
+        items: [['C', 8], ['C++', 8], ['Python', 9], ['Java', 8], ['SQL', 8], ['Bash / Shell', 8], ['Dart / Flutter', 7], ['Ensamblador 68k', 6]]
+      },
+      {
+        title: 'SISTEMAS, KERNEL & OBSERVABILIDAD',
+        items: [['Linux / POSIX', 9], ['Gestión Memoria', 9], ['Procesos & Señales', 8], ['Docker / OCI', 8], ['Valgrind / Debug', 8], ['Telemetría & Logs', 8]]
+      },
+      {
+        title: 'BACKEND, CONCURRENCIA & CLOUD',
+        items: [['FastAPI', 9], ['E/S Asíncrona', 9], ['Concurrencia / Hilos', 8], ['APIs RESTful', 9], ['Microservicios', 8], ['Spring Boot', 7]]
+      },
+      {
+        title: 'BASES DE DATOS & ALMACENAMIENTO',
+        items: [['PostgreSQL', 8], ['Diseño ACID', 8], ['Optimiz. Queries', 8], ['Indexación B-Trees', 8], ['Oracle / MySQL', 7]]
+      },
+      {
+        title: 'IA APLICADA, SANDBOXING & TOOLING',
+        items: [['Servidores MCP', 9], ['Flujos Agénticos', 9], ['HMAC Sandboxing', 9], ['LLM Tooling', 8]]
+      }
+    ],
+    projectsHeader: 'proyectos técnicos destacados',
+    projectsFooter: '<span class="m">→ escribe </span>' + cl('open 1', 'open &lt;1-4&gt;') + '<span class="m"> o haz clic en cualquier fila para abrir la ficha técnica.</span>',
+    openUsageError: '<span class="e">uso: open &lt;1-4&gt;</span>  (ej: ' + cl('open 1') + ' o mira ' + cl('projects') + ')',
+    openStackLabel: 'stack tecnológico:',
+    openMetricsLabel: 'métricas & validación:',
+    openLinksLabel: 'enlaces:',
+    cvTitle: 'currículum vitae // descargas oficiales',
+    cvPrompt: [
+      'Currículum actualizado disponible en dos idiomas con métricas y trayectoria detallada:',
+      '',
+      '  [1] ' + '<a class="c" href="CV_Andreu_Marques_Goyes_ES.pdf" target="_blank" download>CV_Andreu_Marques_Goyes_ES.pdf ↗ (Español)</a>',
+      '  [2] ' + '<a class="c" href="CV_Andreu_Marques_Goyes_EN.pdf" target="_blank" download>CV_Andreu_Marques_Goyes_EN.pdf ↗ (English)</a>',
+      '',
+      '<span class="m">Tip: Escribe </span>' + cl('cv es') + '<span class="m"> o </span>' + cl('cv en') + '<span class="m"> para abrir el documento directamente en una nueva pestaña.</span>'
+    ],
+    hireTitle: 'disponibilidad & propuesta de valor // contratación',
+    hireContent: [
+      '<b>Estado actual:</b> <span class="h">Disponible para incorporación inmediata</span>',
+      '<b>Modalidades:</b> Presencial en <span class="hl-u">Palma de Mallorca</span> · Híbrido · Remoto completo',
+      '<b>Roles idóneos:</b> <span class="hl-k">Backend Software Engineer</span> · <span class="hl-k">Systems Engineer</span> · <span class="hl-k">AI Infrastructure / Tooling Developer</span>',
+      '',
+      '<b>¿Por qué trabajar conmigo?</b>',
+      '• <b class="hl-k">Criterio de ingeniería real:</b> Entiendo lo que ocurre bajo la abstracción (ciclo de reloj, llamadas al sistema, gestión de memoria y red).',
+      '• <b class="hl-k">Seguridad y determinismo:</b> Diseñé PRAXEON para resolver el problema del sandboxing estocástico en agentes de IA con capacidades criptográficas HMAC-SHA256.',
+      '• <b class="hl-k">Código limpio y verificado:</b> Cobertura de tests estricta (Pytest, Valgrind zero-leak, benchmarks empíricos p50 ~0.22ms).',
+      '',
+      '<span class="m">→ Contacto directo:</span> ' + cl('contact') + ' · o escribe a <a class="c" href="mailto:andreuvaleria25@gmail.com">andreuvaleria25@gmail.com</a>'
+    ],
+    educationTitle: 'educación & fundamentos en computación',
+    educationContent: [
+      '<b>Universidad Alfonso X el Sabio (UAX)</b> [2025 – Presente]',
+      '<span class="hl-k">Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</span> · Madrid / Remoto',
+      'Especialización en arquitectura backend empresarial, bases de datos relacionales, concurrencia y pipelines de IA.',
+      '',
+      '<b>Universitat de les Illes Balears (UIB)</b> [2020 – 2024]',
+      '<span class="hl-k">Grado en Ingeniería Informática</span> (96 ECTS superados – Fundamentos de Computación)',
+      'Formación rigurosa: Algoritmia y Estructuras de Datos I y II (Notables), Programación I (<span class="hl-u">Sobresaliente 9,2</span>), Sistemas Operativos I, Estructura de Computadores I y II, Ingeniería del Software, Matemáticas (Cálculo, Álgebra, Estadística).'
+    ],
+    experienceTitle: 'experiencia técnica y trayectoria',
+    experienceContent: [
+      '<b>Desarrollador de Software Independiente & Backend</b> [2020 – Presente]',
+      'Palma de Mallorca, España · <span class="hl-k">Freelance</span>',
+      '• Diseño y despliegue de soluciones de software y web a medida para clientes.',
+      '• Arquitecturas modulares, integraciones de bases de datos, APIs y control de versiones con Git.',
+      '',
+      '<b>Revomon</b> [Jun 2022 – Feb 2023]',
+      '<span class="hl-k">Technical Artist 3D y Optimización de Assets</span> · Remoto',
+      '• Optimización de recursos digitales bajo restricciones estrictas de rendimiento y memoria en tiempo real.',
+      '• Desarrollo de scripts de automatización para pipelines técnicos de producción.'
+    ],
+    contactTitle: 'contacto & perfiles profesionales',
+    contactContent: [
+      'email     <a class="c" href="mailto:andreuvaleria25@gmail.com">andreuvaleria25@gmail.com</a>',
+      'tel       <a class="c" href="tel:+34640142281">+34 640 142 281</a>',
+      'github    <a class="c" href="https://github.com/AndreuVM" target="_blank" rel="noopener">github.com/AndreuVM ↗</a>',
+      'linkedin  <a class="c" href="https://linkedin.com/in/andreuvm" target="_blank" rel="noopener">linkedin.com/in/andreuvm ↗</a>',
+      'ubicación Palma de Mallorca, España (<span class="hl-k">Presencial / Remoto</span>)',
+      '',
+      '<span class="m">Respondo habitualmente en menos de 24 horas.</span>'
+    ],
+    neofetchTitle: 'andreu@systems',
+    neofetchFields: [
+      ['host', 'Andreu Marquès Goyes'],
+      ['rol', 'Ingeniero Backend / Sistemas'],
+      ['especialidad', 'APIs Concurrencia · Sandboxing IA · POSIX'],
+      ['lenguajes', 'C/C++ · Python · Java · SQL · Bash'],
+      ['sistemas', 'Linux / Unix Internals · Docker · OCI'],
+      ['uptime', '5+ años construyendo software'],
+      ['formacion', 'UIB (Ing. Informática) + UAX (DAM)'],
+      ['ubicacion', 'Palma de Mallorca, España'],
+      ['estado', '<span class="h">Disponible 2026</span>']
+    ],
+    notFound: c => `<span class="e">${esc(c)}: comando no encontrado.</span>`,
+    didYouMean: s => `  ¿Quisiste decir ${cl(s)}?`,
+    tryHelp: `  Prueba con ${cl('help')}.`
+  },
+  en: {
+    pageTitle: 'Andreu Marquès Goyes — Backend & Systems Engineer | Portfolio',
+    metaDesc: 'Interactive CLI portfolio of Andreu Marquès Goyes. Backend & Systems Engineer specialized in high-concurrency APIs, AI agent sandboxing, data architecture, and low-level systems.',
+    srTitle: 'Andreu Marquès Goyes — Backend & Systems Engineer',
+    srDesc: 'Specialized in high-concurrency APIs, secure AI agent sandboxing, data architecture, and Linux/C/C++ systems programming.',
+    srNav: ['About', 'Projects', 'Skills', 'Contact'],
+    promptUser: 'visitor@andreu',
+    inputPlaceholder: 'Type a command (e.g.: help, projects, about)...',
+    inputAria: 'Terminal command input',
+    status: 'available',
+    statusTitle: 'Available for on-site or remote roles',
+    topTitle: 'andreu.marques — portfolio v1.2',
+    bannerSub: 'Backend / Systems Engineer · <span class="hl-k">High-Concurrency APIs</span>, <span class="hl-k">AI Sandboxing</span> & <span class="hl-k">Data Architecture</span>',
+    welcomeLine1: 'Welcome. You are exploring the portfolio of <span class="h-name">Andreu Marquès Goyes</span>.',
+    welcomeLine2: 'Interactive terminal <span class="hl-k">[CLI]</span>. Type <span class="hl-u">' + cl('help') + '</span> or click any button to explore.',
+    nextSug: '→ suggested: ',
+    helpHeader: 'available commands',
+    helpRows: [
+      ['about', 'technical background and engineering philosophy'],
+      ['skills', 'core technologies, low-level systems, backend & AI'],
+      ['projects', 'featured technical projects with real-world metrics'],
+      ['open <n>', 'detailed engineering sheet of project (1-4)'],
+      ['neofetch', 'quick Unix-like system summary card'],
+      ['cv', 'view and download official resume in PDF (EN / ES)'],
+      ['hire', 'availability, employment models & value proposition'],
+      ['education', 'academic foundations in CS at UIB & UAX'],
+      ['experience', 'professional career & freelance software engineering'],
+      ['contact', 'email, phone, GitHub and LinkedIn profiles'],
+      ['lang [en|es]', 'toggle portfolio language'],
+      ['theme', 'toggle light / dark theme'],
+      ['clear', 'clear terminal screen']
+    ],
+    helpHint: 'Tab auto-completes · ↑ ↓ command history · Click any command to execute it.',
+    about: [
+      '<span class="h">about.txt // Andreu Marquès Goyes</span>',
+      'Backend and Systems Engineer with a solid foundation in Computer Science.',
+      'I specialize in building software where performance, reliability, and security are non-negotiable:',
+      '',
+      '• <span class="hl-k">AI Execution Sandboxing & Supervision:</span> Deterministic runtime decoupling stochastic proposals via HMAC-SHA256, OCI jails, and native MCP servers.',
+      '• <span class="hl-k">Linux Systems Programming:</span> POSIX syscalls, multithreading, process lifecycle, zero-leak memory audited with Valgrind.',
+      '• <span class="hl-k">High-Concurrency Backend Architecture:</span> Asynchronous RESTful APIs, microservices, query tuning, and ACID transactional integrity.',
+      '',
+      'Based in Palma de Mallorca, Spain. <span class="h-name">Available for on-site, hybrid, or remote roles worldwide</span>.',
+      '',
+      '<span class="m">→ next steps:</span> ' + cl('projects') + ' · ' + cl('skills') + ' · ' + cl('cv') + ' · ' + cl('hire')
+    ],
+    skillsHeader: 'technical skills & toolchain',
+    skillGroups: [
+      {
+        title: 'PROGRAMMING LANGUAGES',
+        items: [['C', 8], ['C++', 8], ['Python', 9], ['Java', 8], ['SQL', 8], ['Bash / Shell', 8], ['Dart / Flutter', 7], ['68k Assembly', 6]]
+      },
+      {
+        title: 'SYSTEMS, KERNEL & OBSERVABILITY',
+        items: [['Linux / POSIX', 9], ['Memory Mgmt', 9], ['Process & Signals', 8], ['Docker / OCI', 8], ['Valgrind / Debug', 8], ['Telemetry & Logs', 8]]
+      },
+      {
+        title: 'BACK-END, CONCURRENCY & CLOUD',
+        items: [['FastAPI', 9], ['Async I/O', 9], ['Multithreading', 8], ['RESTful APIs', 9], ['Microservices', 8], ['Spring Boot', 7]]
+      },
+      {
+        title: 'DATABASES & STORAGE',
+        items: [['PostgreSQL', 8], ['ACID Design', 8], ['Query Tuning', 8], ['B-Trees Indexing', 8], ['Oracle / MySQL', 7]]
+      },
+      {
+        title: 'AI TOOLING & AGENTIC SANDBOXING',
+        items: [['MCP Servers', 9], ['Agentic Flows', 9], ['HMAC Sandboxing', 9], ['LLM Tooling', 8]]
+      }
+    ],
+    projectsHeader: 'featured technical projects',
+    projectsFooter: '<span class="m">→ type </span>' + cl('open 1', 'open &lt;1-4&gt;') + '<span class="m"> or click any row to open the full technical sheet.</span>',
+    openUsageError: '<span class="e">usage: open &lt;1-4&gt;</span>  (e.g.: ' + cl('open 1') + ' or inspect ' + cl('projects') + ')',
+    openStackLabel: 'tech stack:',
+    openMetricsLabel: 'metrics & benchmarks:',
+    openLinksLabel: 'links:',
+    cvTitle: 'curriculum vitae // official resume downloads',
+    cvPrompt: [
+      'Official resumes available in both English and Spanish with complete career benchmarks:',
+      '',
+      '  [1] ' + '<a class="c" href="CV_Andreu_Marques_Goyes_EN.pdf" target="_blank" download>CV_Andreu_Marques_Goyes_EN.pdf ↗ (English)</a>',
+      '  [2] ' + '<a class="c" href="CV_Andreu_Marques_Goyes_ES.pdf" target="_blank" download>CV_Andreu_Marques_Goyes_ES.pdf ↗ (Español)</a>',
+      '',
+      '<span class="m">Tip: Run </span>' + cl('cv en') + '<span class="m"> or </span>' + cl('cv es') + '<span class="m"> to open the PDF directly in a new tab.</span>'
+    ],
+    hireTitle: 'availability & value proposition // hiring',
+    hireContent: [
+      '<b>Current Status:</b> <span class="h">Immediately available for hire</span>',
+      '<b>Work Models:</b> On-site in <span class="hl-u">Palma de Mallorca</span> · Hybrid · Full Remote Worldwide',
+      '<b>Ideal Roles:</b> <span class="hl-k">Backend Software Engineer</span> · <span class="hl-k">Systems Engineer</span> · <span class="hl-k">AI Infrastructure / Tooling Developer</span>',
+      '',
+      '<b>Why work with me?</b>',
+      '• <b class="hl-k">Under-the-hood engineering:</b> Solid grounding in CS internals (clock cycles, memory allocation, syscalls, networking).',
+      '• <b class="hl-k">Deterministic security:</b> Engineered PRAXEON to solve stochastic LLM execution risk using time-bounded HMAC capabilities.',
+      '• <b class="hl-k">Robust, tested code:</b> Strict test discipline (Pytest suites, Valgrind zero-leak audits, empirical benchmarks p50 ~0.22ms).',
+      '',
+      '<span class="m">→ Direct contact:</span> ' + cl('contact') + ' · or email me at <a class="c" href="mailto:andreuvaleria25@gmail.com">andreuvaleria25@gmail.com</a>'
+    ],
+    educationTitle: 'academic foundations in computer science',
+    educationContent: [
+      '<b>Universidad Alfonso X el Sabio (UAX)</b> [2025 – Present]',
+      '<span class="hl-k">Higher Vocational Degree in Multiplatform Application Development (DAM)</span> · Madrid / Remote',
+      'Specialized in enterprise backend architectures, relational databases, concurrent programming, and AI pipelines.',
+      '',
+      '<b>Universitat de les Illes Balears (UIB)</b> [2020 – 2024]',
+      '<span class="hl-k">B.S. in Computer Engineering</span> (96 ECTS Completed – Computer Science Foundations)',
+      'Rigorous academic coursework: Algorithms & Data Structures I and II (Notable/Honors), Computer Programming I (<span class="hl-u">Grade: 9.2/10</span>), Operating Systems I, Computer Architecture I & II, Software Engineering, Applied Mathematics (Calculus, Linear Algebra, Statistics).'
+    ],
+    experienceTitle: 'professional trajectory & experience',
+    experienceContent: [
+      '<b>Independent Software & Backend Developer</b> [2020 – Present]',
+      'Palma de Mallorca, Spain · <span class="hl-k">Freelance</span>',
+      '• Engineered and deployed bespoke software and web solutions for independent clients.',
+      '• Modular system architectures, database integrations, RESTful APIs, and Git version control.',
+      '',
+      '<b>Revomon</b> [Jun 2022 – Feb 2023]',
+      '<span class="hl-k">Freelance 3D Technical Artist & Asset Optimization</span> · Remote',
+      '• Optimized 3D digital assets under strict real-time memory and polygon budgets.',
+      '• Developed automated validation scripts for technical production pipelines.'
+    ],
+    contactTitle: 'contact & professional profiles',
+    contactContent: [
+      'email     <a class="c" href="mailto:andreuvaleria25@gmail.com">andreuvaleria25@gmail.com</a>',
+      'phone     <a class="c" href="tel:+34640142281">+34 640 142 281</a>',
+      'github    <a class="c" href="https://github.com/AndreuVM" target="_blank" rel="noopener">github.com/AndreuVM ↗</a>',
+      'linkedin  <a class="c" href="https://linkedin.com/in/andreuvm" target="_blank" rel="noopener">linkedin.com/in/andreuvm ↗</a>',
+      'location  Palma de Mallorca, Spain (<span class="hl-k">Available for On-site or Remote</span>)',
+      '',
+      '<span class="m">Typically responding within 24 hours.</span>'
+    ],
+    neofetchTitle: 'andreu@systems',
+    neofetchFields: [
+      ['host', 'Andreu Marquès Goyes'],
+      ['role', 'Backend / Systems Engineer'],
+      ['focus', 'High Concurrency · AI Sandboxing · POSIX'],
+      ['languages', 'C/C++ · Python · Java · SQL · Bash'],
+      ['systems', 'Linux / Unix Internals · Docker · OCI'],
+      ['uptime', '5+ years building software'],
+      ['education', 'UIB (CS Foundations) + UAX (DAM)'],
+      ['location', 'Palma de Mallorca, Spain'],
+      ['status', '<span class="h">Available 2026</span>']
+    ],
+    notFound: c => `<span class="e">${esc(c)}: command not found.</span>`,
+    didYouMean: s => `  Did you mean ${cl(s)}?`,
+    tryHelp: `  Try ${cl('help')}.`
+  }
+};
+
+let skip = false, busy = false;
+async function print(lines, d = 22) {
+  busy = true;
+  for (const x of lines) {
+    const e = document.createElement('div');
+    e.className = 'l';
+    e.innerHTML = x;
+    out.appendChild(e);
+    inp.scrollIntoView({ block: 'end' });
+    if (!skip && d) await sleep(d);
+  }
+  busy = false;
+  skip = false;
+}
+
+// Actualizar toda la interfaz, textos globales, metadatos y botones
+function updateUiLang() {
+  const dict = I18N[curLang];
+  document.documentElement.lang = curLang;
+  localStorage.setItem('portfolio_lang', curLang);
+
+  // Metadatos y Accesibilidad
+  document.title = dict.pageTitle;
+  const metaDesc = $('meta[name="description"]');
+  if (metaDesc) metaDesc.setAttribute('content', dict.metaDesc);
+
+  $('#sr-title').textContent = dict.srTitle;
+  $('#sr-desc').textContent = dict.srDesc;
+  $('#sr-nav-about').textContent = dict.srNav[0];
+  $('#sr-nav-projects').textContent = dict.srNav[1];
+  $('#sr-nav-skills').textContent = dict.srNav[2];
+  $('#sr-nav-contact').textContent = dict.srNav[3];
+
+  // Barra superior fija
+  $('#top-title').textContent = dict.topTitle;
+  $('#top-status').textContent = dict.status;
+  $('#top-status').parentElement.setAttribute('title', dict.statusTitle);
+
+  // Botones de selección de idioma
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === curLang);
+  });
+
+  // Prompt e Input
+  $('#prompt-user').textContent = dict.promptUser;
+  inp.placeholder = dict.inputPlaceholder;
+  inp.setAttribute('aria-label', dict.inputAria);
+
+  // Botones de sugerencias rápidas: siempre con comandos CLI canónicos
+  const sug = $('#sug');
+  sug.innerHTML = '';
+  CLI_BUTTONS.forEach(cmd => {
+    const btn = document.createElement('button');
+    btn.textContent = cmd;
+    btn.dataset.c = cmd;
+    sug.appendChild(btn);
+  });
+}
+
+// Renderizar la pantalla de bienvenida y el banner (permanente en #welcome)
+async function renderWelcomeScreen(animateBoot = false) {
+  welcome.innerHTML = '';
+  if (animateBoot) {
+    const b = document.createElement('div');
+    b.className = 'l m';
+    welcome.appendChild(b);
+    const steps = 20;
+    for (let i = 0; i <= steps; i++) {
+      b.textContent = (curLang === 'es' ? 'cargando perfil  [' : 'loading profile  [') + 
+        '█'.repeat(i) + '░'.repeat(steps - i) + '] ' + (i * 5) + '%';
+      await sleep(24);
+    }
+    await sleep(80);
+    b.textContent = (curLang === 'es' ? 'cargando perfil  [' : 'loading profile  [') + '█'.repeat(steps) + '] ok';
+  }
+
+  const dict = I18N[curLang];
+  const bn = document.createElement('div');
+  bn.className = 'ban';
+  bn.innerHTML = 'andreu.marques';
+  welcome.appendChild(bn);
+
+  const welcomeLines = [
+    `<span class="m">${dict.bannerSub}</span>`,
+    '',
+    dict.welcomeLine1,
+    dict.welcomeLine2,
+    `<span class="m">${dict.nextSug}</span>` + 
+      cl('about') + ' · ' + cl('projects') + ' · ' + cl('skills') + ' · ' + cl('cv') + ' · ' + cl('hire'),
+    ''
+  ];
+
+  if (animateBoot) {
+    busy = true;
+    for (const x of welcomeLines) {
+      const e = document.createElement('div');
+      e.className = 'l';
+      e.innerHTML = x;
+      welcome.appendChild(e);
+      inp.scrollIntoView({ block: 'end' });
+      if (!skip) await sleep(28);
+    }
+    busy = false;
+    skip = false;
+  } else {
+    for (const line of welcomeLines) {
+      const e = document.createElement('div');
+      e.className = 'l';
+      e.innerHTML = line;
+      welcome.appendChild(e);
+    }
+  }
+  inp.scrollIntoView({ block: 'end' });
+}
+
+// Cambio de idioma global en caliente (sin avisos redundantes)
+async function setLanguage(newLang, rerunLast = true) {
+  if (newLang !== 'es' && newLang !== 'en') return;
+  skip = true;
+  curLang = newLang;
+  updateUiLang();
+
+  // Actualizar pantalla de bienvenida permanente en el nuevo idioma
+  await renderWelcomeScreen(false);
+
+  // Si había un comando de contenido previamente abierto por el usuario, re-ejecutarlo en el nuevo idioma
+  if (rerunLast && lastExecutedCmd) {
+    const prevBase = lastExecutedCmd.trim().split(/\s+/)[0].toLowerCase();
+    if (!['clear', 'limpiar', 'cls', 'lang', 'idioma', 'theme', 'tema', 'help', 'ayuda'].includes(prevBase)) {
+      out.innerHTML = '';
+      await run(lastExecutedCmd, false);
+    } else {
+      out.innerHTML = '';
+    }
+  } else {
+    out.innerHTML = '';
+  }
+
+  inp.focus({ preventScroll: true });
+}
+
+// Catálogo de comandos canónicos CLI
+const CMD = {
+  help: () => {
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.helpHeader}</span>`,
+      ...dict.helpRows.map(([c, desc]) => {
+        const baseCmd = c.split(' ')[0];
+        return '  ' + cl(baseCmd, c) + ' '.repeat(Math.max(1, 14 - c.length)) + '<span class="m">' + desc + '</span>';
+      }),
+      '',
+      `<span class="m">${dict.helpHint}</span>`
+    ];
+  },
+
+  about: () => I18N[curLang].about,
+
+  skills: () => {
+    const dict = I18N[curLang];
+    const lines = [`<span class="h">${dict.skillsHeader}</span>`];
+    for (const group of dict.skillGroups) {
+      lines.push('');
+      lines.push(`<span class="hl-k">┌── ${group.title}</span>`);
+      for (const [k, v] of group.items) {
+        const bar = `<span class="bar-fill">${'█'.repeat(v)}</span>` + '<span class="m">' + '░'.repeat(10 - v) + '</span>';
+        lines.push(`│   ${pad(k, 22)} ${bar}  <span class="hl-k">${v}</span>/10`);
+      }
+      lines.push('<span class="m">└──</span>');
+    }
+    lines.push('');
+    lines.push(`<span class="m">${curLang === 'es' ? 'Autoevaluación rigurosa basada en proyectos en producción y sistemas reales.' : 'Rigorous self-assessment based on production code and real systems.'}</span>`);
+    lines.push(`<span class="m">${dict.nextSug}</span>` + cl('projects') + ' · ' + cl('cv') + ' · ' + cl('hire'));
+    return lines;
+  },
+
+  projects: () => {
+    const dict = I18N[curLang];
+    const lines = [`<span class="h">${dict.projectsHeader}</span>`, ''];
+    for (const p of PROJECTS) {
+      const pName = p.name[curLang];
+      lines.push(
+        `<a class="pj" data-c="open ${p.id}" data-a="${p.gradA}" data-b="${p.gradB}" data-code="${p.plateCode}" data-title="${esc(pName)}" data-tag="${esc(p.tag)}" data-desc="${esc(p.desc[curLang].split('\n')[0])}">` +
+        `  <span class="m">[${p.id}]</span> <b class="hl-k">${pad(p.slug, 22)}</b>` +
+        `<span class="m">${p.tag}</span>` +
+        `</a>`
+      );
+    }
+    lines.push('');
+    lines.push(dict.projectsFooter);
+    return lines;
+  },
+
+  open: (args = []) => {
+    const dict = I18N[curLang];
+    const arg = (args[0] || '').toLowerCase();
+    const p = PROJECTS.find(x => x.id == arg || x.slug == arg);
+    if (!p) {
+      return [dict.openUsageError];
+    }
+    const nextId = (p.id % PROJECTS.length) + 1;
+    const pName = p.name[curLang];
+    const descLines = p.desc[curLang].split('\n');
+
+    const lines = [
+      `<span class="h">${p.plateCode} // ${pName}</span>`,
+      `<div class="plate" style="background:linear-gradient(135deg, ${p.gradA}, ${p.gradB});">` +
+      `  <span class="plate-code">${p.slug}</span>` +
+      `  <span class="plate-sub">${p.tag}</span>` +
+      `</div>`,
+      ...descLines,
+      '',
+      `<span class="m">${dict.openStackLabel}</span> ${p.stack}`,
+      `<span class="m">${dict.openMetricsLabel}</span> <span class="hl-k">${p.tests}</span> · <span class="hl-k">${p.latency}</span>`
+    ];
+
+    const links = [];
+    if (p.repo) {
+      links.push(`<a class="c" href="${p.repo}" target="_blank" rel="noopener">GitHub Repo ↗</a>`);
+    }
+    if (p.demo) {
+      links.push(`<a class="c" href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`);
+    }
+    lines.push(`<span class="m">${dict.openLinksLabel}</span> ${links.join('   ')}`);
+    lines.push('');
+    lines.push(`<span class="m">${dict.nextSug}</span>` + cl('open ' + nextId, `open ${nextId}`) + ' · ' + cl('projects') + ' · ' + cl('hire'));
+    return lines;
+  },
+
+  cv: (args = []) => {
+    const arg = (args[0] || '').toLowerCase();
+    if (arg === 'es') {
+      window.open('CV_Andreu_Marques_Goyes_ES.pdf', '_blank');
+      return ['<span class="m">Abriendo CV_Andreu_Marques_Goyes_ES.pdf en nueva pestaña...</span>'];
+    }
+    if (arg === 'en') {
+      window.open('CV_Andreu_Marques_Goyes_EN.pdf', '_blank');
+      return ['<span class="m">Opening CV_Andreu_Marques_Goyes_EN.pdf in new tab...</span>'];
+    }
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.cvTitle}</span>`,
+      ...dict.cvPrompt
+    ];
+  },
+
+  hire: () => {
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.hireTitle}</span>`,
+      ...dict.hireContent
+    ];
+  },
+
+  education: () => {
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.educationTitle}</span>`,
+      ...dict.educationContent,
+      '',
+      `<span class="m">${dict.nextSug}</span>` + cl('skills') + ' · ' + cl('projects') + ' · ' + cl('cv')
+    ];
+  },
+
+  experience: () => {
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.experienceTitle}</span>`,
+      ...dict.experienceContent,
+      '',
+      `<span class="m">${dict.nextSug}</span>` + cl('projects') + ' · ' + cl('hire')
+    ];
+  },
+
+  contact: () => {
+    const dict = I18N[curLang];
+    return [
+      `<span class="h">${dict.contactTitle}</span>`,
+      ...dict.contactContent
+    ];
+  },
+
+  neofetch: () => {
+    const dict = I18N[curLang];
+    const ascii = [
+      '    <span class="hl-k">.---.</span>    ',
+      '   <span class="hl-k">/     \\</span>   ',
+      '  <span class="hl-k">| () () |</span>  ',
+      '   <span class="hl-k">\\  _  /</span>   ',
+      '    <span class="hl-k">`---`</span>    ',
+      '   <span class="hl-k">POSIX / C</span> ',
+      '   <span class="hl-k">64-bit OS</span> '
+    ];
+
+    const lines = [
+      `<span class="h">${dict.neofetchTitle}</span>`,
+      '--------------------------------------------------'
+    ];
+
+    dict.neofetchFields.forEach(([key, val], idx) => {
+      const art = ascii[idx] || '             ';
+      lines.push(`${art}  <b>${pad(key, 13)}</b> ${val}`);
+    });
+    lines.push('');
+    lines.push(`<span class="m">${dict.nextSug}</span>` + cl('projects') + ' · ' + cl('skills') + ' · ' + cl('hire'));
+    return lines;
+  },
+
+  lang: (args = []) => {
+    const target = (args[0] || '').toLowerCase();
+    const next = (target === 'es' || target === 'en') ? target : (curLang === 'es' ? 'en' : 'es');
+    setLanguage(next, true);
+    return [];
+  },
+
+  theme: () => {
+    const isDark = R.dataset.theme === 'dark' || 
+      (!R.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+    const nextTheme = isDark ? 'light' : 'dark';
+    R.dataset.theme = nextTheme;
+    localStorage.setItem('portfolio_theme', nextTheme);
+    return [`<span class="m">${curLang === 'es' ? 'Tema configurado a:' : 'Theme set to:'} <b>${nextTheme.toUpperCase()}</b></span>`];
+  },
+
+  clear: () => {
+    out.innerHTML = '';
+    lastExecutedCmd = null;
+    return [];
+  },
+
+  // Huevos de pascua y utilidades Unix / Windows (ocultos de la ayuda oficial)
+  pwd: () => [
+    '/home/andreu/portfolio',
+    `<span class="m">${curLang === 'es' 
+      ? '(En la vida real: Palma de Mallorca, España · a un git push de cualquier lugar)' 
+      : '(In physical reality: Palma de Mallorca, Spain · one git push away from anywhere)'}</span>`
+  ],
+
+  cd: (args = []) => {
+    const target = (args[0] || '').toLowerCase();
+    if (!target || target === '~') {
+      return [`<span class="m">${curLang === 'es' ? 'Ya estás en tu directorio de inicio: /home/andreu' : 'Already at home directory: /home/andreu'}</span>`];
+    }
+    if (target.includes('/dev/null')) {
+      return [`<span class="m">${curLang === 'es' ? 'Redirigiendo a /dev/null... Espera, este portfolio se construyó con almacenamiento persistente; aquí nada se descarta.' : 'Redirecting to /dev/null... Wait, this portfolio was built with persistent storage; nothing gets discarded here.'}</span>`];
+    }
+    if (target.includes('..') || target.startsWith('/') || target === '../') {
+      return [
+        `<span class="e">${curLang === 'es' ? 'cd: permiso denegado (0700).' : 'cd: permission denied (0700).'}</span>`,
+        `<span class="m">${curLang === 'es' ? 'No se puede escapar del portfolio tan fácilmente sin explorar los proyectos primero. Prueba con ' : "You can't escape the portfolio that easily without checking out the projects first. Try "}</span>` + cl('projects')
+      ];
+    }
+    return [
+      `<span class="e">cd: ${esc(args.join(' '))}: ${curLang === 'es' ? 'No existe el directorio o está restringido por sandbox.' : 'Directory does not exist or is restricted by sandbox.'}</span>`
+    ];
+  },
+
+  ls: () => [
+    'about.txt      skills.txt      projects/       cv_es.pdf',
+    'education.txt  experience.txt  contact.txt     cv_en.pdf'
+  ],
+
+  tree: () => [
+    '.',
+    '├── about.txt',
+    '├── skills.txt',
+    '├── cv/',
+    '│   ├── CV_Andreu_Marques_Goyes_ES.pdf',
+    '│   └── CV_Andreu_Marques_Goyes_EN.pdf',
+    '├── projects/',
+    '│   ├── 01_praxeon/',
+    '│   ├── 02_unix_shell_vfs/',
+    '│   ├── 03_trie_word_engine/',
+    '│   └── 04_smart_restaurant_ml/',
+    '├── education.txt',
+    '├── experience.txt',
+    '└── contact.txt',
+    '',
+    `<span class="m">${curLang === 'es' ? '3 directorios, 8 archivos (prueba con ' + cl('projects') + ' o ' + cl('cat about.txt') + ')' : '3 directories, 8 files (try ' + cl('projects') + ' or ' + cl('cat about.txt') + ')'}</span>`
+  ],
+
+  cat: (args = []) => {
+    const file = (args[0] || '').toLowerCase();
+    if (!file) {
+      return [`<span class="m">${curLang === 'es' ? 'uso: cat <archivo> (ej: cat about.txt, cat skills.txt)' : 'usage: cat <file> (e.g.: cat about.txt, cat skills.txt)'}</span>`];
+    }
+    if (/about|sobre/.test(file)) return CMD.about();
+    if (/skill|habil/.test(file)) return CMD.skills();
+    if (/project|proyec/.test(file)) return CMD.projects();
+    if (/contact/.test(file)) return CMD.contact();
+    if (/cv/.test(file)) return CMD.cv();
+    if (/edu|form/.test(file)) return CMD.education();
+    if (/exp/.test(file)) return CMD.experience();
+    if (file.includes('passwd') || file.includes('shadow')) {
+      return [
+        `<span class="e">cat: ${esc(file)}: ${curLang === 'es' ? 'Permiso denegado (403).' : 'Permission denied (403).'}</span>`,
+        `<span class="m">${curLang === 'es' 
+          ? 'Buen intento, ethical hacker. Las credenciales están protegidas con HMAC-SHA256 en PRAXEON.' 
+          : 'Nice try, ethical hacker. Credentials are HMAC-SHA256 protected in PRAXEON.'}</span>`
+      ];
+    }
+    return [`<span class="e">cat: ${esc(file)}: ${curLang === 'es' ? 'no existe el archivo o directorio' : 'no such file or directory'}</span>`];
+  },
+
+  touch: (args = []) => [
+    `<span class="m">${curLang === 'es' 
+      ? `touch: Creando ${esc(args.join(' ') || 'archivo')}... Tocar el sistema sin previo handshake no es de ingenieros de sistemas educados ;)` 
+      : `touch: Creating ${esc(args.join(' ') || 'file')}... Touching the system without prior handshake isn't very polite systems behavior ;)`}</span>`
+  ],
+
+  top: () => [
+    'top - ' + new Date().toLocaleTimeString(curLang === 'es' ? 'es-ES' : 'en-US') + ' up 5 years, 1 user, load average: 0.12, 0.08, 0.04',
+    'Tasks: 3 total, 1 running, 2 sleeping, 0 stopped, 0 zombie',
+    '%Cpu(s): 99.8 us,  0.2 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si',
+    `MiB Mem : 32768.0 total, 16384.0 free, 16384.0 used (${curLang === 'es' ? 'Valgrind: 0 fugas' : 'Valgrind: 0 leaks'})`,
+    '',
+    '  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND',
+    ' 1337 andreu    20   0  524288  65536  32768 R  99.8   0.2  1420:12 andreu --mode=building-systems',
+    '   42 root      20   0  131072  24576  16384 S   0.2   0.1   420:00 praxeon-daemon --sandbox=strict',
+    '    1 system    20   0   16384   4096   2048 S   0.0   0.0    12:34 /sbin/init [Curiosity]'
+  ],
+
+  ps: () => [
+    'USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND',
+    'andreu    1337 99.2  0.2 524288 65536 pts/0    R+   00:00  14:20 andreu-engine --focus-mode',
+    'praxeon     42  0.2  0.1 131072 24576 ?        Ssl  00:00   4:20 praxeon --mcp-server --sandbox=oci',
+    'root         1  0.0  0.0  16384  4096 ?        Ss   00:00   0:12 /sbin/init (sys_engineering)',
+    `<span class="m">${curLang === 'es' ? 'Todos los procesos supervisados sin fugas de memoria (0 leaks).' : 'All processes monitored with zero memory leaks (0 leaks).'}</span>`
+  ],
+
+  chmod: (args = []) => {
+    const raw = args.join(' ');
+    if (raw.includes('777')) {
+      return [
+        `<span class="e">${curLang === 'es' ? 'chmod 777: ¡Violación de seguridad interceptada por PRAXEON!' : 'chmod 777: Security violation intercepted by PRAXEON!'}</span>`,
+        `<span class="m">${curLang === 'es' ? 'En este portfolio respetamos estrictamente el Principio de Mínimo Privilegio (PoLP). Prueba con 0644 o 0755.' : 'In this portfolio we strictly enforce the Principle of Least Privilege (PoLP). Try 0644 or 0755.'}</span>`
+      ];
+    }
+    return [
+      `<span class="m">${curLang === 'es' ? 'Permisos actualizados para: ' : 'Permissions updated for: '}<b>${esc(raw || 'archivo')}</b>. ${curLang === 'es' ? '(Sandbox verificado)' : '(Sandbox verified)'}</span>`
+    ];
+  },
+
+  grep: (args = []) => {
+    const pattern = args.join(' ');
+    if (!pattern) {
+      return [
+        `<span class="m">${curLang === 'es' ? 'uso: grep <patrón> (ej: grep bugs, grep clean-code)' : 'usage: grep <pattern> (e.g.: grep bugs, grep clean-code)'}</span>`
+      ];
+    }
+    return [
+      `<span class="m">${curLang === 'es' 
+        ? `grep: buscando "${esc(pattern)}" en el codebase... 0 bugs, 293 tests pasando, 100% determinismo.` 
+        : `grep: searching "${esc(pattern)}" across codebase... 0 bugs, 293 tests passing, 100% determinism.`}</span>`
+    ];
+  },
+
+  kill: (args = []) => {
+    const sig = args.join(' ') || '-9';
+    return [
+      `<span class="e">SIGKILL (${esc(sig)}) ${curLang === 'es' ? 'enviado.' : 'dispatched.'}</span>`,
+      `<span class="m">${curLang === 'es' 
+        ? 'El proceso ignoró la señal: las buenas arquitecturas son resilientes, se supervisan a sí mismas y se recuperan automáticamente.' 
+        : 'The process ignored the signal: robust architectures are resilient, self-healing, and recover automatically.'}</span>`
+    ];
+  },
+
+  ping: (args = []) => {
+    const target = esc(args[0] || 'andreu.dev');
+    return [
+      `PING ${target} (127.0.0.1) 56(84) bytes of data.`,
+      `64 bytes from ${target} (127.0.0.1): icmp_seq=1 ttl=64 time=0.21 ms`,
+      `64 bytes from ${target} (127.0.0.1): icmp_seq=2 ttl=64 time=0.22 ms`,
+      `64 bytes from ${target} (127.0.0.1): icmp_seq=3 ttl=64 time=0.20 ms`,
+      `--- ${target} ping statistics ---`,
+      `3 packets transmitted, 3 received, 0% packet loss, time 2002ms`,
+      'rtt min/avg/max/mdev = 0.201/0.212/0.224/0.009 ms (p50 PRAXEON baseline)',
+      `<span class="m">${curLang === 'es' ? 'Conexión ultrarrápida y estable con Palma de Mallorca.' : 'Ultra-fast and stable connection to Palma de Mallorca.'}</span>`
+    ];
+  },
+
+  curl: () => [
+    'HTTP/2 200 OK',
+    'server: AndreuEngine/1.0 (Linux/x86_64)',
+    'content-type: application/high-performance-code; charset=utf-8',
+    'x-runtime-latency: 0.22ms',
+    'x-memory-leaks: 0 (Valgrind verified)',
+    'x-sandboxing: PRAXEON (HMAC-SHA256)',
+    'cache-control: max-age=31536000, immutable',
+    `<span class="m">${curLang === 'es' ? 'Recurso obtenido con éxito.' : 'Resource successfully fetched.'}</span>`
+  ],
+
+  man: (args = []) => {
+    const page = (args[0] || 'andreu').toLowerCase();
+    if (page === 'andreu') {
+      return curLang === 'es' ? [
+        'ANDREU(1)                   Manual del Desarrollador                   ANDREU(1)',
+        '',
+        '<span class="h">NOMBRE</span>',
+        '    andreu - Ingeniero Backend y de Sistemas (Palma de Mallorca)',
+        '',
+        '<span class="h">SINOPSIS</span>',
+        '    <b>andreu</b> [--hire] [--remote] [--systems] [--fastapi] [--cpp] [--coffee]',
+        '',
+        '<span class="h">DESCRIPCIÓN</span>',
+        '    Diseña software donde el rendimiento, la concurrencia y la seguridad no',
+        '    son negociables. Especialista en sandboxing determinista (PRAXEON),',
+        '    APIs RESTful de baja latencia y programación a nivel de kernel/POSIX.',
+        '',
+        '<span class="h">OPCIONES</span>',
+        '    <b>--hire</b>      Muestra disponibilidad inmediata para contratación.',
+        '    <b>--remote</b>    Compatible con trabajo remoto internacional o presencial.',
+        '',
+        '<span class="h">BUGS</span>',
+        '    0 conocidos tras compilar exhaustivamente con -Wall -Wextra -Werror.'
+      ] : [
+        'ANDREU(1)                   Developer\'s Manual                   ANDREU(1)',
+        '',
+        '<span class="h">NAME</span>',
+        '    andreu - Backend & Systems Software Engineer (Palma de Mallorca)',
+        '',
+        '<span class="h">SYNOPSIS</span>',
+        '    <b>andreu</b> [--hire] [--remote] [--systems] [--fastapi] [--cpp] [--coffee]',
+        '',
+        '<span class="h">DESCRIPTION</span>',
+        '    Builds software where performance, concurrency, and security are',
+        '    non-negotiable. Specializes in deterministic sandboxing (PRAXEON),',
+        '    low-latency RESTful APIs, and kernel/POSIX systems programming.',
+        '',
+        '<span class="h">OPTIONS</span>',
+        '    <b>--hire</b>      Display immediate availability for hire.',
+        '    <b>--remote</b>    Compatible with worldwide remote or on-site roles.',
+        '',
+        '<span class="h">BUGS</span>',
+        '    0 known bugs after compiling strictly with -Wall -Wextra -Werror.'
+      ];
+    }
+    return [`man: ${esc(page)}: ${curLang === 'es' ? 'No hay entrada de manual para este comando. Prueba con ' : 'No manual entry for this command. Try '} ` + cl('help')];
+  },
+
+  vim: () => [
+    `<span class="h-name">${curLang === 'es' ? '¿Cómo salir de Vim?' : 'How do I exit Vim?'}</span>`,
+    curLang === 'es'
+      ? 'La leyenda de Stack Overflow dice que nadie sale vivo de :wq...'
+      : 'Stack Overflow legend says no one ever truly exits :wq...',
+    curLang === 'es'
+      ? 'Por suerte para ti, esto es un navegador web.'
+      : 'Lucky for you, this is a modern web browser.',
+    `<span class="m">${curLang === 'es' ? 'Para recuperar el control de tu pantalla, escribe ' : 'To regain control of your screen, simply type '}</span>` + cl('clear') + `<span class="m">.</span>`
+  ],
+
+  nano: () => [
+    `<span class="m">${curLang === 'es' 
+      ? '¿Nano / Emacs? Por aquí preferimos NeoVim, makefiles limpios y llamadas POSIX directas.' 
+      : 'Nano / Emacs? Around here we lean towards NeoVim, clean makefiles, and direct POSIX syscalls.'}</span>`,
+    `<span class="m">${curLang === 'es' 
+      ? 'Pero respetamos cualquier editor que no meta telemetría secreta.' 
+      : "Though we respect any editor that doesn't inject secret telemetry."}</span>`
+  ],
+
+  git: (args = []) => {
+    const sub = (args[0] || '').toLowerCase();
+    const rest = args.slice(1).join(' ').toLowerCase();
+    if (sub === 'status') {
+      return [
+        'On branch main',
+        "Your branch is up to date with 'origin/production'.",
+        `nothing to commit, working tree clean (${curLang === 'es' ? '0 fugas, 293 tests pasando' : '0 leaks, 293 tests passing'})`
+      ];
+    }
+    if (sub === 'push') {
+      if (rest.includes('--force') || rest.includes('-f')) {
+        return [
+          `<span class="e">${curLang === 'es' ? '¡¿Force push a main en producción?!' : 'Force push to main in production?!'}</span>`,
+          `<span class="m">${curLang === 'es' 
+            ? 'PRAXEON ha rechazado el webhook criptográfico. Abre una rama y crea un Pull Request como un ingeniero de verdad ;)' 
+            : 'PRAXEON cryptographic webhook rejected the payload. Branch off and submit a proper Pull Request like a real engineer ;)'}</span>`
+        ];
+      }
+      return [
+        'Enumerating objects: 12, done.',
+        'Counting objects: 100% (12/12), done.',
+        'Writing objects: 100% (12/12), 4.21 KiB | 4.21 MiB/s, done.',
+        'To github.com:AndreuVM/portfolio.git',
+        '   9f3c2a1..e811b03  main -> main'
+      ];
+    }
+    if (sub === 'commit') {
+      return [
+        '[main 9f3c2a1] feat(systems): implement zero-leak memory and deterministic sandboxing',
+        ' 4 files changed, 293 insertions(+), 0 deletions(-)'
+      ];
+    }
+    if (sub === 'log') {
+      return [
+        '<span style="color:#f2e24a">commit 9f3c2a1d48e7f92</span> (HEAD -> main, origin/main)',
+        'Author: Andreu Marquès Goyes &lt;andreuvaleria25@gmail.com&gt;',
+        'Date:   2026-10-10 19:46:00 +0200',
+        '',
+        '    feat(runtime): decouple LLM stochastic proposals via HMAC capabilities',
+        '',
+        '<span style="color:#f2e24a">commit 4a2b1c8e7d9f032</span>',
+        'Author: Andreu Marquès Goyes &lt;andreuvaleria25@gmail.com&gt;',
+        'Date:   2026-10-09 14:15:22 +0200',
+        '',
+        '    feat(systems): build zero-leak unix shell and vfs inode simulator'
+      ];
+    }
+    return [
+      'git version 2.45.0.sys',
+      `<span class="m">${curLang === 'es' ? 'Subcomandos compatibles: git status, git log, git push, git commit' : 'Supported subcommands: git status, git log, git push, git commit'}</span>`
+    ];
+  },
+
+  history: () => {
+    if (!hist.length) {
+      return [`<span class="m">${curLang === 'es' ? 'Historial vacío en esta sesión.' : 'Empty history in this session.'}</span>`];
+    }
+    return hist.map((item, idx) => `  ${String(idx + 1).padStart(3, ' ')}  ${esc(item)}`);
+  },
+
+  forkbomb: () => [
+    `<span class="e">${curLang === 'es' ? 'ALERTA: Intento de Fork Bomb detectado (:(){ :|:& };:)' : 'ALERT: Fork Bomb attempt detected (:(){ :|:& };:)'}</span>`,
+    `<span class="m">${curLang === 'es' 
+      ? 'Los límites de cgroups (pids.max=64) y el supervisor de procesos PRAXEON han interceptado la bifurcación exponencial.' 
+      : 'cgroups limits (pids.max=64) and the PRAXEON process supervisor intercepted the exponential fork.'}</span>`,
+    `<span class="m">${curLang === 'es' ? 'El sistema se mantiene frío y estable a 0.22ms.' : 'System remains cool, responsive, and stable at 0.22ms.'}</span>`
+  ],
+
+  dir: () => curLang === 'es' ? [
+    ' El volumen de la unidad C es ANDREU_SYSTEMS',
+    ' El número de serie del volumen es 2026-UIB-UAX',
+    '',
+    ' Directorio de C:\\Users\\andreu\\portfolio',
+    '',
+    '11/10/2026  01:50    &lt;DIR&gt;          .',
+    '11/10/2026  01:50    &lt;DIR&gt;          ..',
+    '11/10/2026  01:50         102.136   CV_Andreu_Marques_Goyes_ES.pdf',
+    '11/10/2026  01:50         101.024   CV_Andreu_Marques_Goyes_EN.pdf',
+    '11/10/2026  01:50    &lt;DIR&gt;          praxeon',
+    '11/10/2026  01:50    &lt;DIR&gt;          unix-shell-vfs',
+    '11/10/2026  01:50    &lt;DIR&gt;          trie-engine',
+    '11/10/2026  01:50    &lt;DIR&gt;          restaurant-ml-queue',
+    '               2 archivos        203.160 bytes',
+    '               6 carpetas    982.144.000 bytes libres',
+    '<span class="m">(Guiño a Windows. Puedes escribir ' + cl('projects') + ' o ' + cl('cv') + ' para abrirlos).</span>'
+  ] : [
+    ' Volume in drive C is ANDREU_SYSTEMS',
+    ' Volume Serial Number is 2026-UIB-UAX',
+    '',
+    ' Directory of C:\\Users\\andreu\\portfolio',
+    '',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          .',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          ..',
+    '10/11/2026  01:50 AM         102,136   CV_Andreu_Marques_Goyes_ES.pdf',
+    '10/11/2026  01:50 AM         101,024   CV_Andreu_Marques_Goyes_EN.pdf',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          praxeon',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          unix-shell-vfs',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          trie-engine',
+    '10/11/2026  01:50 AM    &lt;DIR&gt;          restaurant-ml-queue',
+    '               2 File(s)        203,160 bytes',
+    '               6 Dir(s)     982,144,000 bytes free',
+    '<span class="m">(Windows homage. You can type ' + cl('projects') + ' or ' + cl('cv') + ' to explore).</span>'
+  ],
+
+  ipconfig: () => curLang === 'es' ? [
+    'Configuración IP de Windows / Adaptador Ethernet AndreuNet:',
+    '   Sufijo DNS específico para la conexión. . : mallorca.local',
+    '   Dirección IPv4. . . . . . . . . . . . . . : 127.0.0.1 (No hay lugar como localhost)',
+    '   Máscara de subred . . . . . . . . . . . . : 255.255.255.0',
+    '   Puerta de enlace predeterminada . . . . . : 192.168.1.1 (Palma de Mallorca, ES)',
+    '   Estado del enlace . . . . . . . . . . . . : Listo para teletrabajo o presencial'
+  ] : [
+    'Windows IP Configuration / Ethernet adapter AndreuNet:',
+    '   Connection-specific DNS Suffix  . . . . . : mallorca.local',
+    '   IPv4 Address. . . . . . . . . . . . . . . : 127.0.0.1 (No place like localhost)',
+    '   Subnet Mask . . . . . . . . . . . . . . . : 255.255.255.0',
+    '   Default Gateway . . . . . . . . . . . . . : 192.168.1.1 (Palma de Mallorca, ES)',
+    '   Link Status . . . . . . . . . . . . . . . : Ready for remote worldwide or on-site'
+  ],
+
+  systeminfo: () => curLang === 'es' ? [
+    'Nombre de host:            ANDREU-RIG',
+    'Nombre del SO:             Linux Hardened POSIX Kernel / Arch 6.10',
+    'Fabricante del SO:         Andreu Marquès Goyes',
+    'Configuración del SO:      Estación de trabajo de ingeniería de sistemas',
+    'Tipo de compilación:       Release (-O3 -march=native -Wall -Wextra)',
+    'Procesador(es):            1 procesador(es) instalado(s). [x86_64 High Concurrency]',
+    'Memoria física total:      32.768 MB (Zero memory leaks auditada con Valgrind)',
+    'Ubicación:                 Palma de Mallorca, España',
+    'Revisiones (Hotfixes):     [Python 3.12, C++20, Docker OCI, FastAPI, MCP, Java]'
+  ] : [
+    'Host Name:                 ANDREU-RIG',
+    'OS Name:                   Linux Hardened POSIX Kernel / Arch 6.10',
+    'OS Manufacturer:           Andreu Marquès Goyes',
+    'OS Configuration:          Systems Engineering Workstation',
+    'Build Type:                Release (-O3 -march=native -Wall -Wextra)',
+    'Processor(s):              1 Processor(s) Installed. [x86_64 High Concurrency]',
+    'Total Physical Memory:     32,768 MB (Zero memory leaks Valgrind audited)',
+    'Location:                  Palma de Mallorca, Spain',
+    'Hotfix(es):                [Python 3.12, C++20, Docker OCI, FastAPI, MCP, Java]'
+  ],
+
+  echo: (args = []) => {
+    const raw = args.join(' ');
+    if (raw === '$PATH' || raw === '%PATH%') {
+      return ['/usr/local/bin:/usr/bin/andreu:/opt/praxeon/bin:/dev/mallorca:/home/andreu/.cargo/bin'];
+    }
+    if (!raw) {
+      return [curLang === 'es' ? 'ECHO está activado.' : 'ECHO is on.'];
+    }
+    return [esc(raw)];
+  },
+
+  tasklist: () => [
+    'Nombre de imagen               PID Nombre de sesión Núm. ses. Uso de memoria',
+    '========================= ======== ================ =========== =============',
+    'System Idle Process              0 Services                   0          8 KB',
+    'System                           4 Services                   0        124 KB',
+    'andreu_systems.exe            1337 Console                    1     64.212 KB',
+    'praxeon_mcp.exe                420 Console                    1     24.150 KB',
+    'svchost.exe                   4096 Services                   0    999.999 KB',
+    'valgrind_auditor.exe          2026 Console                    1      4.096 KB',
+    `<span class="m">${curLang === 'es' 
+      ? 'svchost.exe consumiendo memoria como manda la tradición de Windows.' 
+      : 'svchost.exe hogging RAM as per Windows tradition.'}</span>`
+  ],
+
+  sl: () => [
+    '                      (  ) (@@) ( )  (@)  ()    @@    O',
+    '                   (@@@)',
+    '               (    )',
+    '            (@@@@)',
+    '          (   )',
+    '       ++      +------',
+    '       ||  .--"|',
+    '     /===/     |',
+    '    |===|      |           <span style="color:#f2e24a">(Steam Locomotive)</span>',
+    `     \\===\\     |       Choo Choo! ${curLang === 'es' ? '¿Buscabas ls?' : 'Looking for ls?'}`,
+    '      |===\\____|',
+    '      (o)(o)  (o)(o)',
+    `<span class="m">${curLang === 'es' ? 'El clásico error al teclear "ls" en Unix. Aquí tienes tu tren.' : 'The classic typo for "ls" in Unix. Here is your train.'}</span>`
+  ],
+
+  cowsay: (args = []) => {
+    const text = args.join(' ') || (curLang === 'es' 
+      ? 'Clean architecture, zero memory leaks y compilers felices.' 
+      : 'Clean architecture, zero memory leaks, and happy compilers.');
+    const line = '-'.repeat(text.length + 2);
+    return [
+      ` ${line}`,
+      `&lt; ${esc(text)} &gt;`,
+      ` ${line}`,
+      '        \\   ^__^',
+      '         \\  (oo)\\_______',
+      '            (__)\\       )\\/\\',
+      '                ||----w |',
+      '                ||     ||'
+    ];
+  },
+
+  make: (args = []) => {
+    const str = args.join(' ').toLowerCase();
+    if (str.includes('me a sandwich') || str.includes('sandwich')) {
+      return [
+        `<span class="e">${curLang === 'es' ? '¿Qué? Hazlo tú mismo. No eres root.' : 'What? Make it yourself. You are not root.'}</span>`,
+        `<span class="m">${curLang === 'es' ? "(Prueba con '" + cl('sudo make me a sandwich') + "')" : "(Try '" + cl('sudo make me a sandwich') + "')"}</span>`
+      ];
+    }
+    return [
+      `<span class="m">${curLang === 'es' 
+        ? 'make: *** No se especificó ningún objetivo y no se encontró ningún makefile. Alto.' 
+        : 'make: *** No targets specified and no makefile found.  Stop.'}</span>`
+    ];
+  },
+
+  beer: () => [
+    '    .~~~~.',
+    '   i====i_',
+    '   |    |_)   [ Cerveza artesana // Palma de Mallorca ]',
+    '   |    |     Despliegue a producción sin errores 500.',
+    '   `-==-\'',
+    `<span class="m">${curLang === 'es' 
+      ? '¡Salud! Una cerveza bien fresca para celebrar un despliegue exitoso a producción.' 
+      : 'Cheers! A cold beer to celebrate a zero-error production deployment.'}</span>`
+  ],
+
+  doom: () => [
+    '<span class="hl-u">DOOM (1993) // WebAssembly Port</span>',
+    'Compiling ID Tech 1 engine into WebAssembly...',
+    '[████████████████████] 100% OK',
+    `<span class="m">${curLang === 'es' 
+      ? 'Broma :) Pero PRAXEON y la shell POSIX de Andreu ejecutan con la misma adrenalina y cero lag.' 
+      : "Just kidding :) But PRAXEON and Andreu's POSIX shell run with the same adrenaline and zero lag."}</span>`
+  ],
+
+  fortune: () => {
+    const quotes = curLang === 'es' ? [
+      ['Linus Torvalds', 'Hablar es barato. Enséñame el código.'],
+      ['Edsger W. Dijkstra', 'Si depurar es el proceso de quitar fallos, programar debe ser el proceso de meterlos.'],
+      ['Brian Kernighan', 'Depurar es el doble de difícil que escribir el código en primer lugar.'],
+      ['Rob Pike', 'La simplicidad es requisito previo para la fiabilidad.'],
+      ['Donald Knuth', 'La optimización prematura es la raíz de todos los males.'],
+      ['Ken Thompson', 'No puedes confiar en código que no hayas creado totalmente tú mismo.'],
+      ['Filosofía Unix', 'Haz una sola cosa y hazla bien.'],
+      ['Bjarne Stroustrup', 'En C++ es más difícil dispararte en el pie, pero cuando lo haces, te vuelas la pierna entera.']
+    ] : [
+      ['Linus Torvalds', 'Talk is cheap. Show me the code.'],
+      ['Edsger W. Dijkstra', 'If debugging is the process of removing bugs, then programming must be the process of putting them in.'],
+      ['Brian Kernighan', 'Debugging is twice as hard as writing the code in the first place.'],
+      ['Rob Pike', 'Simplicity is prerequisite for reliability.'],
+      ['Donald Knuth', 'Premature optimization is the root of all evil.'],
+      ['Ken Thompson', "You can't trust code that you did not totally create yourself."],
+      ['Unix Philosophy', 'Do one thing and do it well.'],
+      ['Bjarne Stroustrup', 'In C++, it is harder to shoot yourself in the foot, but when you do, it blows your whole leg off.']
+    ];
+    const [author, text] = quotes[Math.floor(Math.random() * quotes.length)];
+    return [
+      `"${text}"`,
+      `<span class="m">        — ${author}</span>`
+    ];
+  },
+
+  whoami: () => [
+    curLang === 'es'
+      ? 'visitante. Con buen ojo técnico y curiosidad por el buen código.'
+      : 'visitor. With an eye for solid engineering and systems craft.'
+  ],
+
+  sudo: (args = []) => {
+    const full = args.join(' ').toLowerCase();
+    if (full.includes('hire')) {
+      return CMD.hire();
+    }
+    if (full.includes('sandwich')) {
+      return [
+        ' [==============================]  <span class="m">(Pan tostado)</span>',
+        ' ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  <span style="color:#2ed573">(Lechuga fresca)</span>',
+        ' ================================  <span style="color:#f2e24a">(Tomate & Queso derretido)</span>',
+        ' ################################  <span style="color:#ee5253">(Filete jugoso)</span>',
+        ' [==============================]  <span class="m">(Pan tostado)</span>',
+        '',
+        `<span class="h-name">Okay.</span> ${curLang === 'es' ? 'Aquí tienes tu sandwich recién compilado con privilegios de superusuario.' : 'Here is your fresh sandwich compiled with superuser privileges.'}`
+      ];
+    }
+    return [
+      curLang === 'es'
+        ? '<span class="e">visitante no está en el archivo sudoers. Este incidente será reportado… a nadie.</span> (¿Buscabas ' + cl('sudo hire-me') + '?)'
+        : '<span class="e">visitor is not in the sudoers file. This incident will be reported… to no one.</span> (Looking for ' + cl('sudo hire-me') + '?)'
+    ];
+  },
+
+  coffee: () => [
+    '      ( (',
+    '       ) )',
+    '    ........',
+    '    |      |]',
+    '    \\      /',
+    '     `----\'',
+    `<span class="m">${curLang === 'es' ? 'Espresso doble inyectado en el runtime. Latencia p50 reducida a 0.05ms.' : 'Double espresso injected into runtime. p50 latency down to 0.05ms.'}</span>`
+  ],
+
+  matrix: () => [
+    '<span style="color:#2ed573">01010000 01010010 01000001 01011000 01000101 01001111 01001110</span>',
+    '<span style="color:#2ed573">Deterministic Sandboxing // Kernel POSIX // Memory Zero-Leak</span>',
+    `<span class="m">${curLang === 'es' ? 'La realidad no es una ilusión cuando compila sin warnings con -Wall -Wextra -Werror.' : 'Reality is no illusion when it compiles warning-free with -Wall -Wextra -Werror.'}</span>`
+  ],
+
+  rm: () => [`<span class="e">${curLang === 'es' ? 'rm: operación denegada por el sandbox de seguridad PRAXEON.' : 'rm: operation denied by PRAXEON security sandbox.'}</span>`],
+  date: () => [new Date().toLocaleString(curLang === 'es' ? 'es-ES' : 'en-US')],
+  hola: () => ['Hola. Escribe ' + cl('help') + ' para ver los comandos.'],
+  hello: () => ['Hello! Type ' + cl('help') + ' to see all available commands.'],
+  hi: () => ['Hello! Type ' + cl('help') + ' to see all available commands.']
+};
+
+// Alias adicionales
+CMD.htop = () => CMD.top();
+CMD.ifconfig = () => CMD.ipconfig();
+CMD.vi = CMD.nvim = () => CMD.vim();
+CMD.emacs = () => CMD.nano();
+CMD.wget = () => CMD.curl();
+CMD.cerveza = () => CMD.beer();
+CMD[':(){ :|:& };:'] = () => CMD.forkbomb();
+
+// Alias de respaldo para comandos en español
+CMD.ayuda = () => CMD.help();
+CMD['sobre-mi'] = CMD.sobremi = () => CMD.about();
+CMD.habilidades = () => CMD.skills();
+CMD.proyectos = args => CMD.projects(args);
+CMD.abrir = args => CMD.open(args);
+CMD.contratar = () => CMD.hire();
+CMD['sudo hire-me'] = () => CMD.hire();
+CMD['hire-me'] = () => CMD.hire();
+CMD.contacto = () => CMD.contact();
+CMD.formacion = CMD.educacion = () => CMD.education();
+CMD.experiencia = () => CMD.experience();
+CMD.idioma = args => CMD.lang(args);
+CMD.tema = () => CMD.theme();
+CMD.limpiar = CMD.cls = () => CMD.clear();
+
+// Comandos canónicos para autocompletado y sugerencias (oculta los easter eggs)
+const CANONICAL_CMDS = [
+  'help', 'about', 'skills', 'projects', 'open', 'neofetch', 
+  'cv', 'hire', 'education', 'experience', 'contact', 'lang', 'theme', 'clear'
+];
+const hist = [];
+let hi = 0;
+let triggerBandBoost = () => {};
+
+async function run(raw, trackLast = true) {
+  const v = raw.trim();
+  if (!v) return;
+  triggerBandBoost();
+
+  const dict = I18N[curLang];
+  const e = document.createElement('div');
+  e.className = 'l';
+  e.innerHTML = `<span class="p"><b>${dict.promptUser}</b><span class="m">:~$</span></span> ${esc(v)}`;
+  out.appendChild(e);
+
+  hist.push(v);
+  hi = hist.length;
+
+  const [cmd, ...args] = v.split(/\s+/);
+  const k = cmd.toLowerCase();
+  const trimmed = v.toLowerCase();
+
+  if (trackLast && !['help', 'ayuda', 'clear', 'limpiar', 'cls', 'theme', 'tema', 'lang', 'idioma'].includes(k)) {
+    lastExecutedCmd = v;
+  }
+  let lines;
+
+  if (v.includes(':(){') || trimmed === 'forkbomb' || trimmed === ':(){ :|:& };:') {
+    lines = CMD.forkbomb();
+  } else if (trimmed === 'sudo hire-me' || trimmed === 'sudo hire') {
+    lines = CMD.hire();
+  } else if (trimmed.startsWith('sudo make me a sandwich') || trimmed === 'sudo make sandwich') {
+    lines = CMD.sudo(['make', 'me', 'a', 'sandwich']);
+  } else if (trimmed === 'make me a sandwich' || trimmed === 'make sandwich') {
+    lines = CMD.make(['me', 'a', 'sandwich']);
+  } else if (CMD[k]) {
+    lines = CMD[k](args);
+  } else {
+    const suggestion = CANONICAL_CMDS.find(n => n.startsWith(k));
+    lines = [
+      dict.notFound(cmd) + 
+      (suggestion ? dict.didYouMean(suggestion) : dict.tryHelp)
+    ];
+  }
+
+  await print(lines);
+}
+
+// Event Listeners para Entrada de Usuario
+inp.addEventListener('keydown', e => {
+  if (busy) skip = true;
+  if (e.key === 'Enter') {
+    const val = inp.value;
+    inp.value = '';
+    run(val);
+  } else if (e.key === 'Tab') {
+    e.preventDefault();
+    const curr = inp.value.trim().toLowerCase();
+    const matches = CANONICAL_CMDS.filter(n => n.startsWith(curr));
+    if (curr && matches.length === 1) {
+      inp.value = matches[0] + ' ';
+    }
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    if (hi > 0) inp.value = hist[--hi];
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    if (hi < hist.length - 1) inp.value = hist[++hi];
+    else { hi = hist.length; inp.value = ''; }
+  } else if (e.key === 'l' && e.ctrlKey) {
+    e.preventDefault();
+    CMD.clear();
+  }
+});
+
+// Clics globales (delegación única para comandos interactivos y botones de sugerencias)
+document.addEventListener('click', e => {
+  const targetCmd = e.target.closest('[data-c]');
+  if (targetCmd) {
+    run(targetCmd.dataset.c);
+    inp.focus();
+    return;
+  }
+  if (!e.target.closest('a, button, input')) {
+    inp.focus();
+  }
+});
+
+// Botones de cambio de idioma
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    setLanguage(btn.dataset.lang, true);
+  });
+});
+
+// Botón de alternancia de tema
+$('#btn-theme').addEventListener('click', () => {
+  CMD.theme();
+  inp.focus();
+});
+
+// Previsualización flotante con inercia para proyectos
+const pv = $('#pv');
+let px = 0, py = 0, tx = 0, ty = 0, isShowing = false;
+
+addEventListener('pointermove', e => {
+  tx = e.clientX + 28;
+  ty = e.clientY - 160;
+});
+
+out.addEventListener('mouseover', e => {
+  const row = e.target.closest('.pj');
+  if (row) {
+    pv.style.background = `linear-gradient(135deg, ${row.dataset.a}, ${row.dataset.b})`;
+    pv.innerHTML = `
+      <div class="pv-title">${row.dataset.code}</div>
+      <div class="pv-tag">${row.dataset.tag}</div>
+      <div class="pv-desc">${row.dataset.desc}</div>
+    `;
+    pv.classList.add('on');
+    isShowing = true;
+  }
+});
+
+out.addEventListener('mouseout', e => {
+  if (e.target.closest('.pj')) {
+    pv.classList.remove('on');
+    isShowing = false;
+  }
+});
+
+(function animatePreview() {
+  px += (tx - px) * 0.14;
+  py += (ty - py) * 0.14;
+  pv.style.transform = `translate(${px}px, ${py}px) scale(${isShowing ? 1 : 0.85}) rotate(${(tx - px) * 0.12}deg)`;
+  requestAnimationFrame(animatePreview);
+})();
+
+// Reloj en tiempo real
+const clk = $('#clk');
+(function updateClock() {
+  clk.textContent = new Date().toLocaleTimeString(curLang === 'es' ? 'es-ES' : 'en-US');
+  setTimeout(updateClock, 1000);
+})();
+
+/* Banda animada de partículas desplazable con el scroll de la página */
+(()=>{
+  const cv = $('#band'),
+        ctx = cv.getContext('2d'),
+        RM = matchMedia('(prefers-reduced-motion: reduce)').matches,
+        ROWS = 9;
+  let W, H, P = [], span = 0, mx = -999, my = -999, hl = '#f2e24a', n = 0, speedBoost = 1.0, vTime = 0;
+
+  // Respuesta reactiva al input del usuario: impulso rápido de velocidad
+  triggerBandBoost = () => {
+    speedBoost = Math.min(5.5, speedBoost > 1.2 ? speedBoost + 2.5 : 4.5);
+  };
+
+  function rs() {
+    const r = devicePixelRatio || 1;
+    W = innerWidth;
+    H = cv.clientHeight || 190;
+    cv.width = W * r;
+    cv.height = H * r;
+    ctx.setTransform(r, 0, 0, r, 0, 0);
+    P = [];
+    const gap = W < 720 ? 13 : 11,
+          cols = Math.ceil(W / gap) + 4;
+    span = cols * gap;
+
+    for (let j = 0; j < ROWS; j++) {
+      const k = (j + 0.5) / ROWS;
+      for (let c = 0; c < cols; c++) {
+        P.push({
+          x: c * gap + (j % 2) * gap / 2 + (Math.random() - 0.5) * 3,
+          j,
+          y0: H * 0.2 + k * H * 0.6 + (Math.random() - 0.5) * 4,
+          s: 2 + Math.random() * 3 + (1 - Math.abs(k - 0.5) * 2) * 2,
+          ox: 0,
+          oy: 0,
+          sp: 0.14 + j * 0.03 + Math.random() * 0.06,
+          pa: (Math.random() - 0.5) * 0.9,
+          am: 0.7 + Math.random() * 0.6
+        });
+      }
+    }
+  }
+
+  addEventListener('resize', rs);
+  rs();
+
+  addEventListener('pointermove', e => {
+    const rect = cv.getBoundingClientRect();
+    mx = e.clientX - rect.left;
+    my = e.clientY - rect.top;
+  });
+  addEventListener('pointerup', e => {
+    if (e.pointerType === 'touch') { mx = my = -999; }
+  });
+  document.addEventListener('mouseleave', () => {
+    mx = my = -999;
+  });
+
+  (function animateParticles() {
+    n++;
+    if (n % 40 === 1) {
+      hl = getComputedStyle(R).getPropertyValue('--hl').trim() || hl;
+    }
+
+    // Suave desaceleración exponencial hacia la velocidad normal (~2.5 a 3s)
+    if (speedBoost > 1.001) {
+      speedBoost = 1.0 + (speedBoost - 1.0) * 0.972;
+    } else {
+      speedBoost = 1.0;
+    }
+    vTime += (1 / 60) * speedBoost;
+    const t = vTime,
+          RR = 115;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = hl;
+
+    for (const p of P) {
+      if (!RM) {
+        p.x -= p.sp * speedBoost;
+        if (p.x < -20) p.x += span;
+      }
+      const ph = p.x * 0.011 + t * 0.6 + p.j * 0.25 + p.pa,
+            env = 0.35 + 0.9 * (0.5 + 0.5 * Math.sin(p.x * 0.0027 + t * 0.19 + Math.sin(p.x * 0.0011 - t * 0.07) * 2)),
+            dens = 0.5 + 0.5 * Math.sin(p.x * 0.0045 - t * 0.14 + Math.sin(p.x * 0.0016 + t * 0.05) * 1.8),
+            sw = Math.exp(-((p.x - (W + 300 - (t * 70) % (W + 600))) ** 2) / 28800),
+            y = p.y0 + (Math.sin(ph) * H * 0.12 + Math.sin(p.x * 0.004 - t * 0.33 + p.pa) * H * 0.1 + Math.sin(p.x * 0.019 - t * 0.5) * H * 0.03) * env * p.am - sw * H * 0.22;
+
+      const dx = p.x - mx,
+            dy = y - my,
+            d = Math.hypot(dx, dy);
+      let tx = 0, ty = 0;
+      if (d < RR && d > 0.01) {
+        const q = 1 - d / RR,
+              m = q * q * 75;
+        tx = dx / d * m;
+        ty = dy / d * m;
+      }
+      p.ox += (tx - p.ox) * 0.12;
+      p.oy += (ty - p.oy) * 0.12;
+
+      const edge = 1 - Math.abs((y - H / 2) / (H / 2));
+      const boostAlphaBonus = (speedBoost - 1.0) * 0.08;
+      ctx.globalAlpha = Math.max(0.08, Math.min(1.0, (0.25 + edge * 0.65) * (0.3 + 0.7 * dens) + boostAlphaBonus));
+      ctx.save();
+      ctx.translate(p.x + p.ox, y + p.oy);
+      ctx.rotate(Math.sin(ph) * 0.5);
+      const s = p.s * (0.55 + 0.65 * dens);
+      ctx.fillRect(-s / 2, -s / 2, s, s);
+      ctx.restore();
+    }
+    requestAnimationFrame(animateParticles);
+  })();
+})();
+
+// Inicialización de tema si estaba guardado
+const savedTheme = localStorage.getItem('portfolio_theme');
+if (savedTheme) {
+  R.dataset.theme = savedTheme;
+}
+
+// Secuencia de arranque inicial
+(async () => {
+  updateUiLang();
+  await renderWelcomeScreen(true);
+  inp.focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>
