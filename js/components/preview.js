@@ -23,16 +23,19 @@ export function initPreview(previewSelector = '#pv', containerSelector = '#out')
     const row = e.target.closest('.pj');
     if (row) {
       const hasImg = Boolean(row.dataset.img);
+      const imgPos = row.dataset.imgPos || 'top center';
       const imgHtml = hasImg ? `
         <div class="pv-shot">
           <div class="pv-bar">
             <span class="pv-dots"><i></i><i></i><i></i></span>
             <span class="pv-url">${row.dataset.demo ? row.dataset.demo.replace(/^https?:\/\//, '') : 'preview'}</span>
           </div>
-          <img src="${row.dataset.img}" alt="${row.dataset.code}" class="pv-img" />
+          <img src="${row.dataset.img}" alt="${row.dataset.code}" class="pv-img" style="object-position:${imgPos}" />
         </div>
       ` : '';
-      const badgeHtml = row.dataset.demo ? `<div class="pv-badge">● LANDING PAGE DISPONIBLE ↗</div>` : '';
+      const badgeHtml = row.dataset.badge
+        ? `<div class="pv-badge">${row.dataset.badge}</div>`
+        : (row.dataset.demo ? `<div class="pv-badge">● DEMO DISPONIBLE ↗</div>` : '');
 
       pv.classList.toggle('has-img', hasImg);
       pv.style.background = `linear-gradient(135deg, ${row.dataset.a}, ${row.dataset.b})`;

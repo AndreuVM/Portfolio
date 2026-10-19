@@ -98,7 +98,7 @@ Los datos de los proyectos se definen en [`js/data/projects.js`](file:///C:/User
 | **1** | **PRAXEON** | Python 3.12, Docker, MCP, HMAC-SHA256, FastAPI, Pytest | *p50 ~ 0.22 ms · 293 tests passing*<br>Runtime determinista desacoplando propuestas estocásticas de LLMs mediante capacidades criptográficas y sandboxing OCI multicapa.<br>[Landing Page](https://andreuvm.github.io/praxeon/) · [GitHub Repo](https://github.com/AndreuVM/praxeon) |
 | **2** | **Unix Shell & VFS Simulator** | C, C++, POSIX API, GDB, Valgrind, Make | *Zero-leak Valgrind verificado · Sub-ms execution*<br>Shell tipo Unix desde cero con control de ciclo de vida de procesos y simulador de sistema de archivos virtual con tabla de inodos. |
 | **3** | **Trie-Based Word Engine** | Java, Android SDK, Trie, Dynamic Regex, JUnit | *Búsquedas en O(L) · Latencia < 1 ms*<br>Estructura de prefijos Trie sobre decenas de miles de palabras en memoria y motor dinámico de anagramas. |
-| **4** | **Capacity & Queue Engine** | Python, FastAPI, Scikit-Learn, Docker, SQL | *-28% tiempos de espera · E/S Asíncrona*<br>Microservicio asíncrono con regresión ML para predicción de rotación de mesas y asignación dinámica de capacidad en restauración. |
+| **4** | **MarQ PM** | TypeScript, React, Node.js, Express, MCP, SQLite, PWA | *Sprint 1-4 suites · WebSockets*<br>Plataforma de gestión de proyectos con colaboración nativa humano-IA, aislamiento multi-tenant por base de datos SQLite y servidor MCP.<br>[Live Demo (Provisional)](http://34.66.33.205/) *(Repo Privado)* |
 
 ---
 

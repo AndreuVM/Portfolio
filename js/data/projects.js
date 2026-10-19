@@ -23,7 +23,8 @@ export const PROJECTS = [
     stack: 'Python 3.12, Docker, Model Context Protocol (MCP), HMAC-SHA256, FastAPI, Pytest',
     repo: 'https://github.com/AndreuVM/praxeon',
     demo: 'https://andreuvm.github.io/praxeon/',
-    image: 'assets/praxeon-preview.png'
+    image: 'assets/praxeon-preview.png',
+    imagePosition: 'top center'
   },
   {
     id: 2,
@@ -69,23 +70,26 @@ export const PROJECTS = [
   },
   {
     id: 4,
-    slug: 'capacity-queue-engine',
+    slug: 'marq',
+    aliases: ['marq-pm', 'capacity-queue-engine'],
     name: {
-      es: 'Motor Inteligente de Optimización de Capacidad y Colas',
-      en: 'Smart Restaurant Capacity & Queue Optimization Engine'
+      es: 'MarQ PM: Plataforma de Gestión de Proyectos Humano-IA',
+      en: 'MarQ PM: Human-AI Collaborative Project Management Platform'
     },
-    tag: 'Python · FastAPI · Scikit-Learn · Docker · SQL',
-    gradA: '#2e86de',
-    gradB: '#0abde3',
-    plateCode: 'P-004 // ML-OPT-QUEUE',
-    tests: '-28% tiempos de espera / wait times',
-    latency: 'Async I/O concurrente',
+    tag: 'TypeScript · React · MCP · Node/Express · SQLite · PWA',
+    gradA: '#1e293b',
+    gradB: '#0f766e',
+    plateCode: 'P-004 // COLLAB-AI-PM',
+    tests: 'Sprint 1-4 & E2E suites passing',
+    latency: 'WebSocket / Real-Time Sync',
     desc: {
-      es: 'Microservicio asíncrono con modelo de regresión de Machine Learning para predecir rotación de mesas y asignación dinámica de capacidad, reduciendo esperas en un 28%.\nServicios contenedorizados con Docker y APIs REST de alta concurrencia con validación de esquemas y telemetría JSON estructurada.',
-      en: 'Asynchronous backend service with ML regression predicting table turn-times to optimize seat allocation, reducing customer wait times by 28%.\nContainerized services with Docker and high-concurrency REST APIs with automated schema validation and structured JSON telemetry.'
+      es: 'Plataforma integral de gestión de proyectos diseñada para colaboración fluida humano-IA con servidor nativo Model Context Protocol (MCP).\nAislamiento físico multi-tenant con SQLite dedicado por cuenta (Database-per-Account), sincronización bidireccional en tiempo real con WebSockets, y Progressive Web App reactiva con tablero Kanban.',
+      en: 'Comprehensive project management platform designed for seamless human-AI collaboration featuring native Model Context Protocol (MCP) server integration.\nPhysical multi-tenant isolation via dedicated SQLite per account (Database-per-Account), bidirectional real-time synchronization over WebSockets, and reactive PWA with Kanban drag-and-drop.'
     },
-    stack: 'Python, FastAPI, Scikit-Learn, Docker, PostgreSQL / SQL, Pydantic, Asynchronous I/O',
-    repo: 'https://github.com/AndreuVM',
-    demo: null
+    stack: 'TypeScript, React, Vite, Node.js, Express, Model Context Protocol (MCP), SQLite, WebSockets, TailwindCSS, PWA',
+    repo: null,
+    demo: 'http://34.66.33.205/',
+    image: 'assets/marq-preview.png',
+    imagePosition: 'center center'
   }
 ];

@@ -54,7 +54,7 @@ export function createEasterEggCommands(context, canonical) {
         '│   ├── 01_praxeon/',
         '│   ├── 02_unix_shell_vfs/',
         '│   ├── 03_trie_word_engine/',
-        '│   └── 04_smart_restaurant_ml/',
+        '│   └── 04_marq_pm/',
         '├── education.txt',
         '├── experience.txt',
         '└── contact.txt',
@@ -356,7 +356,7 @@ export function createEasterEggCommands(context, canonical) {
         '11/10/2026  01:50    &lt;DIR&gt;          praxeon',
         '11/10/2026  01:50    &lt;DIR&gt;          unix-shell-vfs',
         '11/10/2026  01:50    &lt;DIR&gt;          trie-engine',
-        '11/10/2026  01:50    &lt;DIR&gt;          restaurant-ml-queue',
+        '11/10/2026  01:50    &lt;DIR&gt;          marq-pm',
         '               2 archivos        203.160 bytes',
         '               6 carpetas    982.144.000 bytes libres',
         '<span class="m">(Guiño a Windows. Puedes escribir ' + cl('projects') + ' o ' + cl('cv') + ' para abrirlos).</span>'
@@ -373,7 +373,7 @@ export function createEasterEggCommands(context, canonical) {
         '10/11/2026  01:50 AM    &lt;DIR&gt;          praxeon',
         '10/11/2026  01:50 AM    &lt;DIR&gt;          unix-shell-vfs',
         '10/11/2026  01:50 AM    &lt;DIR&gt;          trie-engine',
-        '10/11/2026  01:50 AM    &lt;DIR&gt;          restaurant-ml-queue',
+        '10/11/2026  01:50 AM    &lt;DIR&gt;          marq-pm',
         '               2 File(s)        203,160 bytes',
         '               6 Dir(s)     982,144,000 bytes free',
         '<span class="m">(Windows homage. You can type ' + cl('projects') + ' or ' + cl('cv') + ' to explore).</span>'

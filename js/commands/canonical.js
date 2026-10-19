@@ -53,8 +53,13 @@ export function createCanonicalCommands(context) {
       const lines = [`<span class="h">${dict.projectsHeader}</span>`, ''];
       for (const p of PROJECTS) {
         const pName = p.name[curLang];
+        const badgeText = p.demo
+          ? (p.slug === 'praxeon'
+              ? (curLang === 'es' ? '● LANDING PAGE DISPONIBLE ↗' : '● LANDING PAGE AVAILABLE ↗')
+              : (curLang === 'es' ? '● DEMO EN VIVO DISPONIBLE ↗' : '● LIVE DEMO AVAILABLE ↗'))
+          : '';
         lines.push(
-          `<a class="pj" data-c="open ${p.id}" data-a="${p.gradA}" data-b="${p.gradB}" data-code="${p.plateCode}" data-title="${esc(pName)}" data-tag="${esc(p.tag)}" data-desc="${esc(p.desc[curLang].split('\n')[0])}"${p.image ? ` data-img="${p.image}"` : ''}${p.demo ? ` data-demo="${p.demo}"` : ''}>` +
+          `<a class="pj" data-c="open ${p.id}" data-a="${p.gradA}" data-b="${p.gradB}" data-code="${p.plateCode}" data-title="${esc(pName)}" data-tag="${esc(p.tag)}" data-desc="${esc(p.desc[curLang].split('\n')[0])}"${p.image ? ` data-img="${p.image}"` : ''}${p.imagePosition ? ` data-img-pos="${p.imagePosition}"` : ''}${p.demo ? ` data-demo="${p.demo}"` : ''}${badgeText ? ` data-badge="${badgeText}"` : ''}>` +
           `  <span class="m">[${p.id}]</span> <b class="hl-k">${pad(p.slug, 22)}</b>` +
           `<span class="m">${p.tag}</span>` +
           `</a>`
@@ -69,7 +74,7 @@ export function createCanonicalCommands(context) {
       const curLang = context.getLang();
       const dict = I18N[curLang];
       const arg = (args[0] || '').toLowerCase();
-      const p = PROJECTS.find(x => x.id == arg || x.slug == arg);
+      const p = PROJECTS.find(x => x.id == arg || x.slug == arg || (x.aliases && x.aliases.includes(arg)));
       if (!p) {
         return [dict.openUsageError];
       }
@@ -79,17 +84,27 @@ export function createCanonicalCommands(context) {
 
       let plateHtml;
       if (p.image) {
+        const isPraxeon = p.slug === 'praxeon';
+        const browserTitle = curLang === 'es'
+          ? (isPraxeon ? 'Abrir landing page en nueva pestaña' : 'Abrir demo en vivo en nueva pestaña')
+          : (isPraxeon ? 'Open landing page in new tab' : 'Open live demo in new tab');
+        const overlayText = curLang === 'es'
+          ? (isPraxeon ? 'Visitar Landing Page ↗' : 'Visitar Demo en Vivo ↗')
+          : (isPraxeon ? 'Visit Landing Page ↗' : 'Visit Live Demo ↗');
+        const targetUrl = p.demo || p.repo;
+        const displayUrl = p.demo ? p.demo.replace(/^https?:\/\//, '') : (p.repo ? p.repo.replace(/^https?:\/\//, '') : p.slug);
+
         plateHtml = 
           `<div class="plate plate-rich" style="background:linear-gradient(135deg, ${p.gradA}, ${p.gradB});">` +
-          `  <a class="plate-browser" href="${p.demo || p.repo}" target="_blank" rel="noopener" title="${curLang === 'es' ? 'Abrir landing page en nueva pestaña' : 'Open landing page in new tab'}">` +
+          `  <a class="plate-browser" href="${targetUrl}" target="_blank" rel="noopener" title="${browserTitle}">` +
           `    <div class="plate-browser-bar">` +
           `      <span class="plate-dots"><i></i><i></i><i></i></span>` +
-          `      <span class="plate-url">${p.demo ? p.demo.replace(/^https?:\/\//, '') : p.slug}</span>` +
+          `      <span class="plate-url">${displayUrl}</span>` +
           `      <span class="plate-link-hint">${curLang === 'es' ? 'Visitar ↗' : 'Visit ↗'}</span>` +
           `    </div>` +
           `    <div class="plate-img-wrap">` +
-          `      <img src="${p.image}" alt="${p.slug} preview" class="plate-img" />` +
-          `      <div class="plate-overlay"><span>${curLang === 'es' ? 'Visitar Landing Page ↗' : 'Visit Landing Page ↗'}</span></div>` +
+          `      <img src="${p.image}" alt="${p.slug} preview" class="plate-img" style="object-position:${p.imagePosition || 'top center'}" />` +
+          `      <div class="plate-overlay"><span>${overlayText}</span></div>` +
           `    </div>` +
           `  </a>` +
           `  <div class="plate-meta">` +
@@ -119,10 +134,14 @@ export function createCanonicalCommands(context) {
         links.push(`<a class="c" href="${p.repo}" target="_blank" rel="noopener">GitHub Repo ↗</a>`);
       }
       if (p.demo) {
-        const demoLabel = p.slug === 'praxeon' ? 'Landing Page ↗' : 'Live Demo ↗';
+        const demoLabel = p.slug === 'praxeon'
+          ? 'Landing Page ↗'
+          : (curLang === 'es' ? 'Demo en Vivo ↗' : 'Live Demo ↗');
         links.push(`<a class="c" href="${p.demo}" target="_blank" rel="noopener">${demoLabel}</a>`);
       }
-      lines.push(`<span class="m">${dict.openLinksLabel}</span> ${links.join('   ')}`);
+      if (links.length > 0) {
+        lines.push(`<span class="m">${dict.openLinksLabel}</span> ${links.join('   ')}`);
+      }
       lines.push('');
       lines.push(`<span class="m">${dict.nextSug}</span>` + cl('open ' + nextId, `open ${nextId}`) + ' · ' + cl('projects') + ' · ' + cl('hire'));
       return lines;
@@ -248,6 +267,11 @@ export function createCanonicalCommands(context) {
   cmds.idioma = args => cmds.lang(args);
   cmds.tema = () => cmds.theme();
   cmds.limpiar = cmds.cls = () => cmds.clear();
+
+  // Accesos directos a proyectos destacados
+  cmds.praxeon = () => cmds.open(['1']);
+  cmds.marq = () => cmds.open(['4']);
+  cmds['marq-pm'] = () => cmds.open(['4']);
 
   return cmds;
 }
