@@ -53,8 +53,9 @@ export function createCanonicalCommands(context) {
       const lines = [`<span class="h">${dict.projectsHeader}</span>`, ''];
       for (const p of PROJECTS) {
         const pName = p.name[curLang];
+        const hasLanding = p.slug === 'praxeon' || p.slug === 'marq';
         const badgeText = p.demo
-          ? (p.slug === 'praxeon'
+          ? (hasLanding
               ? (curLang === 'es' ? '● LANDING PAGE DISPONIBLE ↗' : '● LANDING PAGE AVAILABLE ↗')
               : (curLang === 'es' ? '● DEMO EN VIVO DISPONIBLE ↗' : '● LIVE DEMO AVAILABLE ↗'))
           : '';
@@ -84,13 +85,13 @@ export function createCanonicalCommands(context) {
 
       let plateHtml;
       if (p.image) {
-        const isPraxeon = p.slug === 'praxeon';
+        const hasLanding = p.slug === 'praxeon' || p.slug === 'marq';
         const browserTitle = curLang === 'es'
-          ? (isPraxeon ? 'Abrir landing page en nueva pestaña' : 'Abrir demo en vivo en nueva pestaña')
-          : (isPraxeon ? 'Open landing page in new tab' : 'Open live demo in new tab');
+          ? (hasLanding ? 'Abrir landing page en nueva pestaña' : 'Abrir demo en vivo en nueva pestaña')
+          : (hasLanding ? 'Open landing page in new tab' : 'Open live demo in new tab');
         const overlayText = curLang === 'es'
-          ? (isPraxeon ? 'Visitar Landing Page ↗' : 'Visitar Demo en Vivo ↗')
-          : (isPraxeon ? 'Visit Landing Page ↗' : 'Visit Live Demo ↗');
+          ? (hasLanding ? 'Visitar Landing Page ↗' : 'Visitar Demo en Vivo ↗')
+          : (hasLanding ? 'Visit Landing Page ↗' : 'Visit Live Demo ↗');
         const targetUrl = p.demo || p.repo;
         const displayUrl = p.demo ? p.demo.replace(/^https?:\/\//, '') : (p.repo ? p.repo.replace(/^https?:\/\//, '') : p.slug);
 
@@ -134,7 +135,8 @@ export function createCanonicalCommands(context) {
         links.push(`<a class="c" href="${p.repo}" target="_blank" rel="noopener">GitHub Repo ↗</a>`);
       }
       if (p.demo) {
-        const demoLabel = p.slug === 'praxeon'
+        const hasLanding = p.slug === 'praxeon' || p.slug === 'marq';
+        const demoLabel = hasLanding
           ? 'Landing Page ↗'
           : (curLang === 'es' ? 'Demo en Vivo ↗' : 'Live Demo ↗');
         links.push(`<a class="c" href="${p.demo}" target="_blank" rel="noopener">${demoLabel}</a>`);

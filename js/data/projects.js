@@ -48,7 +48,7 @@ export const PROJECTS = [
     repo: null,
     demo: 'http://34.66.33.205/',
     image: 'assets/marq-preview.png',
-    imagePosition: 'center center'
+    imagePosition: 'top center'
   },
   {
     id: 3,
