@@ -22,7 +22,8 @@ export const PROJECTS = [
     },
     stack: 'Python 3.12, Docker, Model Context Protocol (MCP), HMAC-SHA256, FastAPI, Pytest',
     repo: 'https://github.com/AndreuVM/praxeon',
-    demo: null
+    demo: 'https://andreuvm.github.io/praxeon/',
+    image: 'assets/praxeon-preview.png'
   },
   {
     id: 2,

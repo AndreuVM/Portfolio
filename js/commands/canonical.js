@@ -54,7 +54,7 @@ export function createCanonicalCommands(context) {
       for (const p of PROJECTS) {
         const pName = p.name[curLang];
         lines.push(
-          `<a class="pj" data-c="open ${p.id}" data-a="${p.gradA}" data-b="${p.gradB}" data-code="${p.plateCode}" data-title="${esc(pName)}" data-tag="${esc(p.tag)}" data-desc="${esc(p.desc[curLang].split('\n')[0])}">` +
+          `<a class="pj" data-c="open ${p.id}" data-a="${p.gradA}" data-b="${p.gradB}" data-code="${p.plateCode}" data-title="${esc(pName)}" data-tag="${esc(p.tag)}" data-desc="${esc(p.desc[curLang].split('\n')[0])}"${p.image ? ` data-img="${p.image}"` : ''}${p.demo ? ` data-demo="${p.demo}"` : ''}>` +
           `  <span class="m">[${p.id}]</span> <b class="hl-k">${pad(p.slug, 22)}</b>` +
           `<span class="m">${p.tag}</span>` +
           `</a>`
@@ -94,7 +94,8 @@ export function createCanonicalCommands(context) {
         links.push(`<a class="c" href="${p.repo}" target="_blank" rel="noopener">GitHub Repo ↗</a>`);
       }
       if (p.demo) {
-        links.push(`<a class="c" href="${p.demo}" target="_blank" rel="noopener">Live Demo ↗</a>`);
+        const demoLabel = p.slug === 'praxeon' ? 'Landing Page ↗' : 'Live Demo ↗';
+        links.push(`<a class="c" href="${p.demo}" target="_blank" rel="noopener">${demoLabel}</a>`);
       }
       lines.push(`<span class="m">${dict.openLinksLabel}</span> ${links.join('   ')}`);
       lines.push('');

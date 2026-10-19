@@ -315,8 +315,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 270px;
-  height: 310px;
+  width: 290px;
+  min-height: 310px;
   pointer-events: none;
   z-index: 40;
   opacity: 0;
@@ -325,16 +325,88 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 14px;
+  padding: 12px;
   font-size: 11px;
   letter-spacing: .06em;
   color: #1a1914;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+  box-shadow: 0 12px 36px rgba(0,0,0,.2);
+  border-radius: 4px;
+  overflow: hidden;
 }
 #pv.on { opacity: 1; }
+#pv.has-img {
+  justify-content: flex-start;
+}
+#pv .pv-shot {
+  width: 100%;
+  background: #0b0e12;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+#pv .pv-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  background: #161b22;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+#pv .pv-dots {
+  display: flex;
+  gap: 3.5px;
+}
+#pv .pv-dots i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff5f56;
+}
+#pv .pv-dots i:nth-child(2) { background: #ffbd2e; }
+#pv .pv-dots i:nth-child(3) { background: #27c93f; }
+#pv .pv-url {
+  font-size: 8px;
+  color: #8b949e;
+  font-family: var(--mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#pv .pv-img {
+  width: 100%;
+  height: 128px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+#pv .pv-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+}
 #pv .pv-title { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
-#pv .pv-tag { font-size: 10px; opacity: .9; margin-bottom: 6px; }
+#pv .pv-tag { font-size: 10px; opacity: .9; margin-bottom: 5px; }
 #pv .pv-desc { font-size: 10px; line-height: 1.35; opacity: .95; }
+#pv .pv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #0b0e12;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
 
 @media (max-width: 720px) {
   #pv { display: none !important; }
