@@ -77,12 +77,37 @@ export function createCanonicalCommands(context) {
       const pName = p.name[curLang];
       const descLines = p.desc[curLang].split('\n');
 
+      let plateHtml;
+      if (p.image) {
+        plateHtml = 
+          `<div class="plate plate-rich" style="background:linear-gradient(135deg, ${p.gradA}, ${p.gradB});">` +
+          `  <a class="plate-browser" href="${p.demo || p.repo}" target="_blank" rel="noopener" title="${curLang === 'es' ? 'Abrir landing page en nueva pestaña' : 'Open landing page in new tab'}">` +
+          `    <div class="plate-browser-bar">` +
+          `      <span class="plate-dots"><i></i><i></i><i></i></span>` +
+          `      <span class="plate-url">${p.demo ? p.demo.replace(/^https?:\/\//, '') : p.slug}</span>` +
+          `      <span class="plate-link-hint">${curLang === 'es' ? 'Visitar ↗' : 'Visit ↗'}</span>` +
+          `    </div>` +
+          `    <div class="plate-img-wrap">` +
+          `      <img src="${p.image}" alt="${p.slug} preview" class="plate-img" />` +
+          `      <div class="plate-overlay"><span>${curLang === 'es' ? 'Visitar Landing Page ↗' : 'Visit Landing Page ↗'}</span></div>` +
+          `    </div>` +
+          `  </a>` +
+          `  <div class="plate-meta">` +
+          `    <span class="plate-code">${p.slug}</span>` +
+          `    <span class="plate-sub">${p.tag}</span>` +
+          `  </div>` +
+          `</div>`;
+      } else {
+        plateHtml =
+          `<div class="plate" style="background:linear-gradient(135deg, ${p.gradA}, ${p.gradB});">` +
+          `  <span class="plate-code">${p.slug}</span>` +
+          `  <span class="plate-sub">${p.tag}</span>` +
+          `</div>`;
+      }
+
       const lines = [
         `<span class="h">${p.plateCode} // ${pName}</span>`,
-        `<div class="plate" style="background:linear-gradient(135deg, ${p.gradA}, ${p.gradB});">` +
-        `  <span class="plate-code">${p.slug}</span>` +
-        `  <span class="plate-sub">${p.tag}</span>` +
-        `</div>`,
+        plateHtml,
         ...descLines,
         '',
         `<span class="m">${dict.openStackLabel}</span> ${p.stack}`,
