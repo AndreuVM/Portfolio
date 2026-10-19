@@ -270,8 +270,8 @@ export function createCanonicalCommands(context) {
 
   // Accesos directos a proyectos destacados
   cmds.praxeon = () => cmds.open(['1']);
-  cmds.marq = () => cmds.open(['4']);
-  cmds['marq-pm'] = () => cmds.open(['4']);
+  cmds.marq = () => cmds.open(['2']);
+  cmds['marq-pm'] = () => cmds.open(['2']);
 
   return cmds;
 }
