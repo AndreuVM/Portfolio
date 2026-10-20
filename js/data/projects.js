@@ -46,7 +46,7 @@ export const PROJECTS = [
     },
     stack: 'TypeScript, React, Vite, Node.js, Express, Model Context Protocol (MCP), SQLite, WebSockets, TailwindCSS, PWA',
     repo: null,
-    demo: 'http://34.66.33.205/',
+    demo: 'https://www.marqpm.com/',
     image: 'assets/marq-preview.png',
     imagePosition: 'top center'
   },
